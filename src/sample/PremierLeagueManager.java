@@ -128,9 +128,9 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
         String team1Name = input2.nextLine();
         System.out.print("Team 2    :   ");
         String team2Name = input3.nextLine();
-        System.out.print("Team 1 Score    :   ");
+        System.out.print(team1Name+" Score    :   ");
         int team1Score = input.nextInt();
-        System.out.print("Team 2 Score    :   ");
+        System.out.print(team2Name+" Score    :   ");
         int team2Score = input.nextInt();
         if(team1Score>team2Score){
             teamWon = team1Name;
