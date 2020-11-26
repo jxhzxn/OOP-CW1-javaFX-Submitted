@@ -107,7 +107,7 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
         Scanner input = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
         Scanner input3 = new Scanner(System.in);
-        String teamWon;
+        String teamWon = null;
         System.out.println("Add a Match");
         System.out.println("-------------------");
         System.out.println("");
@@ -126,7 +126,10 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
             int team1Score = input.nextInt();
         System.out.print(team2Name+" Score    :   ");
             int team2Score = input.nextInt();
-        if(team1Score>team2Score){
+
+         if(team1Score==team2Score){
+
+         }else if(team1Score>team2Score){
             teamWon = team1Name;
         }else{
             teamWon = team2Name;
@@ -134,11 +137,11 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
 
         FootballClub team1 = getClub(team1Name);
         FootballClub team2 = getClub(team2Name);
-        FootballClub winningTeam = getClub(teamWon);
+
 
         //Updating the Team Statistics
-        team1.setNofGoalsScored(team1.getNofGoalsScored()+team1Score);  //updating team 1 score
-        team2.setNofGoalsScored(team2.getNofGoalsScored()+team2Score);  //updating team 2 score
+        team1.setNofGoalsScored(team1.getNofGoalsScored()+team1Score);  //updating team 1 goals scored
+        team2.setNofGoalsScored(team2.getNofGoalsScored()+team2Score);  //updating team 2 goals scored
 
         team1.setNofGoalsReceived(team1.getNofGoalsReceived()+team2Score);  //updating team 1 goals received
         team2.setNofGoalsReceived(team2.getNofGoalsReceived()+team1Score);  //updating team 2 goals received
@@ -150,14 +153,19 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
             team1.setNofWins(team1.getNofWins()+1);         //updating team 1 nof wins
             team1.setNofPoints(team1.getNofPoints()+2);     //updating team1 points
             team2.setNofDefeats(team2.getNofDefeats()+1);   //updating team 2 nof defeats
-        }else{
+        }else if(team2Name.equals(teamWon)){
             team2.setNofWins(team2.getNofWins()+1);         //updating team 2 nof wins
             team2.setNofPoints(team2.getNofPoints()+2);     //updating team2 points
             team1.setNofDefeats(team1.getNofDefeats()+1);   //updating team1 nof defeats
+        }else{
+            team1.setNofDraws(team1.getNofDraws()+1);       //updating team1 nof draws
+            team2.setNofDraws(team2.getNofDraws()+1);       //updating team2 nof draws
+            team1.setNofPoints(team1.getNofPoints()+1);     //updating team1 points
+            team2.setNofPoints(team2.getNofPoints()+1);     //updating team2 points
         }
 
 
-        Match match = new Match(matchDate,team1,team2,team1Score,team2Score,winningTeam);
+        Match match = new Match(matchDate,team1,team2,team1Score,team2Score);
         playedMatches.add(match);
 
 
@@ -171,7 +179,12 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
         System.out.println(team1.getClubName()+" vs "+team2.getClubName());
         System.out.println(team1.getClubName()+" Scored "+match.getTeam1Score());
         System.out.println(team2.getClubName()+" Scored "+match.getTeam2Score());
-        System.out.println(winningTeam.getClubName()+" won the Game");
+        if(teamWon==null){
+            System.out.println("Match was Drawn");
+        }else{
+            FootballClub winningTeam = getClub(teamWon);
+            System.out.println(winningTeam.getClubName()+" won the Game");
+        }
         System.out.println("");
         System.out.println("");
 

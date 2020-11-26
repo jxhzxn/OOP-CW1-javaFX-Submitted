@@ -8,15 +8,13 @@ public class Match implements Serializable {
     private FootballClub team2;
     private int team1Score;
     private int team2Score;
-    private FootballClub teamWon;
 
-    public Match(Date date, FootballClub team1, FootballClub team2, int team1Score, int team2Score, FootballClub teamWon) {
+    public Match(Date date, FootballClub team1, FootballClub team2, int team1Score, int team2Score) {
         this.date = date;
         this.team1 = team1;
         this.team2 = team2;
         this.team1Score = team1Score;
         this.team2Score = team2Score;
-        this.teamWon = teamWon;
     }
 
     public Date getDate() {
@@ -59,11 +57,4 @@ public class Match implements Serializable {
         this.team2Score = team2Score;
     }
 
-    public FootballClub getTeamWon() {
-        return teamWon;
-    }
-
-    public void setTeamWon(FootballClub teamWon) {
-        this.teamWon = teamWon;
-    }
 }
