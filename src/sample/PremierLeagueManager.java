@@ -211,22 +211,31 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
         return option;
     }
 
+    public void test(){
+        System.out.println("test");
+    }
+
+    public void test1(){
+        System.out.println("test1");
+    }
+
     public void sortTable(){
-//        int x=1;
         if(clubsArray.size()==1){
 
-        }else{
-            for(int x=1;x<=clubsArray.size()-1;x++){
-                if(clubsArray.get(x).getNofPoints()>clubsArray.get(x-1).getNofPoints()){
-                    Collections.swap(clubsArray,x,x-1);
-                }else if(clubsArray.get(x).getNofPoints()==clubsArray.get(x-1).getNofPoints()){
-                    if(clubsArray.get(x).getNofGoalsScored()>clubsArray.get(x-1).getNofGoalsScored()){
-                        Collections.swap(clubsArray,x,x-1);
+        }else {
+            for (int y = 1; y <= clubsArray.size() - 1; y++) {
+                for (int x = 1; x <= clubsArray.size() - 1; x++) {
+                    if (clubsArray.get(x).getNofPoints() > clubsArray.get(x - 1).getNofPoints()) {
+                        Collections.swap(clubsArray, x, x - 1);
+                    } else if (clubsArray.get(x).getNofPoints() == clubsArray.get(x - 1).getNofPoints()) {
+                        if (clubsArray.get(x).getNofGoalsScored() > clubsArray.get(x - 1).getNofGoalsScored()) {
+                            Collections.swap(clubsArray, x, x - 1);
+                        }
                     }
                 }
             }
         }
-    }
+        }
 
     public void saveInstance(PremierLeagueManager plm){
         try{
@@ -259,4 +268,6 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
                 "clubsArray=" + clubsArray +
                 '}';
     }
+
+
 }
