@@ -50,13 +50,13 @@ public class Main {
                     plm.saveInstance(plm);
                     System.exit(1);
                 }
-                    if(plm.decide().equals("y")){
-                        plm.consoleRun();
-                    }else{
+                    if(plm.decide().equals("x")){
                         System.out.println("");
                         System.out.println("Byee...");
                         plm.saveInstance(plm);
                         System.exit(1);
+                    }else{
+                        plm.consoleRun();
                     }
             }
         }catch (InputMismatchException e){

@@ -21,19 +21,12 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
         String homeground = input.nextLine();
 
         FootballClub newClub = new FootballClub(location,clubName,homeground,0,0,0,0,0,0,0);
-//        try{
-//            FileOutputStream fileStream = new FileOutputStream("club.ser", true);
-//            ObjectOutputStream os = new ObjectOutputStream(fileStream);
-//            os.writeObject(newClub);
-//            os.close();
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }
+
         clubsArray.add(newClub);
         System.out.println("");
         System.out.println("Club Registered");
         System.out.println("");
-        System.out.println(":::::::::::::::::: Registered Clubs    :   "+clubsArray.size()+" ::::::::::::::::::");
+        System.out.println("[[ Registered Clubs    :   "+clubsArray.size()+" ]]");
         System.out.println("");
         return newClub;
     }
@@ -88,7 +81,7 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
     public void displayTable(){
 
 //        System.out.println(clubsArray.size());
-        sortArray();
+        sortTable();
 
 //        FootballClub newClub1 = new FootballClub("Spain","Arsenal","Santa Clara",0,0,0,0,0,0,0);
 //        FootballClub newClub2 = new FootballClub("Italy","Chelsea","Venice",0,0,0,0,0,0,0);
@@ -98,6 +91,7 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
 //        clubsArray.add(newClub2);
 //        clubsArray.add(newClub3);
 
+        System.out.println("");
         System.out.println("[[ Points Table ]]");
         System.out.println("");
         System.out.printf("%-20s%-15s%-15s%-10s%-15s%-18s%-8s%-10s%-10s%-10s\n", "Name of the Club","Location","HomeGround","Matches","GoalsScored","GoalsReceived","Wins","Draws","Defeats","Points");
@@ -118,20 +112,20 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
         System.out.println("-------------------");
         System.out.println("");
         System.out.print("Enter the Day  :   ");
-        int day = input.nextInt();
+            int day = input.nextInt();
         System.out.print("Enter the Month  :   ");
-        int month = input.nextInt();
+            int month = input.nextInt();
         System.out.print("Enter the Year  :   ");
-        int year = input.nextInt();
+            int year = input.nextInt();
         Date matchDate = new Date(day,month,year);
         System.out.print("Team 1    :   ");
         String team1Name = input2.nextLine();
         System.out.print("Team 2    :   ");
         String team2Name = input3.nextLine();
         System.out.print(team1Name+" Score    :   ");
-        int team1Score = input.nextInt();
+            int team1Score = input.nextInt();
         System.out.print(team2Name+" Score    :   ");
-        int team2Score = input.nextInt();
+            int team2Score = input.nextInt();
         if(team1Score>team2Score){
             teamWon = team1Name;
         }else{
@@ -210,14 +204,14 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
 
     public String decide(){
         System.out.println("");
-        System.out.print("Do you want to go to the Console again?    (y/n)   :   ");
+        System.out.print("Press any key to continue .... (Press 'x' to Exit)  :   ");
         Scanner input = new Scanner(System.in);
         String option = input.nextLine();
         System.out.println("");
         return option;
     }
 
-    public void sortArray(){
+    public void sortTable(){
 //        int x=1;
         if(clubsArray.size()==1){
 
@@ -225,16 +219,14 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
             for(int x=1;x<=clubsArray.size()-1;x++){
                 if(clubsArray.get(x).getNofPoints()>clubsArray.get(x-1).getNofPoints()){
                     Collections.swap(clubsArray,x,x-1);
+                }else if(clubsArray.get(x).getNofPoints()==clubsArray.get(x-1).getNofPoints()){
+                    if(clubsArray.get(x).getNofGoalsScored()>clubsArray.get(x-1).getNofGoalsScored()){
+                        Collections.swap(clubsArray,x,x-1);
+                    }
                 }
             }
         }
     }
-
-
-
-//    public void sortArrayed(){
-//        System.out.println("fml");
-//    }
 
     public void saveInstance(PremierLeagueManager plm){
         try{
