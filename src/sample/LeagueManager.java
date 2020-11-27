@@ -1,7 +1,7 @@
 package sample;
 
 public interface LeagueManager {
-    public SportsClub createClub();
+    public SportsClub createClub(String clubName,String location,String homeground);
     public void deleteClub(String clubName);
     public void displayStats();
     public void displayTable();

@@ -14,14 +14,14 @@ public class PremierLeagueManager extends Application implements Serializable,Le
     private ArrayList<Match> playedMatches = new ArrayList<>();
 
     @Override
-    public SportsClub createClub() {
-        Scanner input = new Scanner(System.in);
-        System.out.print("Name of the Club  :   ");
-        String clubName = input.nextLine();
-        System.out.print("Location of the Club  :   ");
-        String location = input.nextLine();
-        System.out.print("Homeground  :   ");
-        String homeground = input.nextLine();
+    public SportsClub createClub(String clubName,String location,String homeground) {
+//        Scanner input = new Scanner(System.in);
+//        System.out.print("Name of the Club  :   ");
+//        String clubName = input.nextLine();
+//        System.out.print("Location of the Club  :   ");
+//        String location = input.nextLine();
+//        System.out.print("Homeground  :   ");
+//        String homeground = input.nextLine();
 
         FootballClub newClub = new FootballClub(location,clubName,homeground,0,0,0,0,0,0,0);
 

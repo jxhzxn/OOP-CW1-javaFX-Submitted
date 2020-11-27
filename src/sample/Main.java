@@ -31,7 +31,14 @@ public class Main {
             while(option!=0){
                 option = input.nextInt();
                 if(option==1){
-                    plm.createClub();
+                    Scanner inputClub = new Scanner(System.in);
+                    System.out.print("Name of the Club  :   ");
+                    String clubName = inputClub.nextLine();
+                    System.out.print("Location of the Club  :   ");
+                    String location = inputClub.nextLine();
+                    System.out.print("Homeground  :   ");
+                    String homeground = inputClub.nextLine();
+                    plm.createClub(clubName,location,homeground);
                 }else if(option==2){
                     Scanner sc = new Scanner(System.in);
                     System.out.println(" ");

@@ -1,0 +1,28 @@
+#textField{
+    -fx-font-size: 18;
+}
+
+#errorField{
+    -fx-background-color: lightpink;
+    -fx-font-size: 18;
+    -fx-color: black;
+}
+
+#closeBtn{
+    -fx-background-color: crimson;
+    -fx-font-size: 18;
+    -fx-font-weight: bolder;
+    -fx-border-color: black;
+   -fx-border-width: 5;
+}
+
+#createClubBtn{
+    -fx-font-size: 18;
+    -fx-background-color: hotpink;
+    -fx-font-weight: bold;
+}
+
+#headLbl{
+    -fx-font-size: 35;
+    -fx-font-weight: bold;
+}
