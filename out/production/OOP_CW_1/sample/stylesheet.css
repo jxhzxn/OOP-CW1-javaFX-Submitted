@@ -3,9 +3,10 @@
 }
 
 #errorField{
-    -fx-background-color: lightpink;
+    -fx-background-color: #F08080;
     -fx-font-size: 18;
     -fx-color: black;
+    -fx-text-fill: white;
 }
 
 #closeBtn{
@@ -18,11 +19,36 @@
 
 #createClubBtn{
     -fx-font-size: 18;
-    -fx-background-color: hotpink;
+    -fx-background-color: darkorange;
     -fx-font-weight: bold;
+}
+
+#createClubBtn:hover{
+    -fx-background-color: #e57e00;
 }
 
 #headLbl{
     -fx-font-size: 35;
+    -fx-font-weight: bold;
+    /*-fx-text-fill: #ff6666;*/
+    -fx-font-family: "Verdana";
+    -fx-background-color: #e57e00;
+    -fx-padding: 10;
+    -fx-border-radius: 20;
+}
+
+#output{
+    -fx-border-width: 5;
+    -fx-border-color: black;
+    -fx-font-size: 22px;
+    -fx-padding: 20;
+    -fx-text-alignment: center;
+    -fx-background-color: lightpink;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#createHead{
+    -fx-font-size: 23px;
     -fx-font-weight: bold;
 }

@@ -38,7 +38,7 @@ public class GraphicalInterface {
 
         Button createClubBtn = new Button("Create Club");
         createClubBtn.setLayoutX(800);
-        createClubBtn.setLayoutY(150);
+        createClubBtn.setLayoutY(170);
         createClubBtn.setId("createClubBtn");
 
         Button closeBtn = new Button("[X]");
@@ -49,17 +49,29 @@ public class GraphicalInterface {
         TextField clubNameTxt = new TextField();
         clubNameTxt.setPromptText("Club Name");
         clubNameTxt.setLayoutX(50);
-        clubNameTxt.setLayoutY(150);
+        clubNameTxt.setLayoutY(170);
 
         TextField clubLocationTxt = new TextField();
         clubLocationTxt.setPromptText("Club Location");
         clubLocationTxt.setLayoutX(300);
-        clubLocationTxt.setLayoutY(150);
+        clubLocationTxt.setLayoutY(170);
 
         TextField homeGroundTxt = new TextField();
         homeGroundTxt.setPromptText("Home Ground");
         homeGroundTxt.setLayoutX(550);
-        homeGroundTxt.setLayoutY(150);
+        homeGroundTxt.setLayoutY(170);
+
+        Label createHead = new Label("Create new Club");
+        createHead.setLayoutX(50);
+        createHead.setLayoutY(130);
+        createHead.setId("createHead");
+
+        Label output = new Label();
+        output.setPrefHeight(120);
+        output.setPrefWidth(950);
+        output.setLayoutY(110);
+        output.setLayoutX(30);
+        output.setId("output");
 
         clubNameTxt.setId("textField");
         clubLocationTxt.setId("textField");
@@ -75,7 +87,7 @@ public class GraphicalInterface {
                 errorCheck(clubNameTxt,clubLocationTxt,homeGroundTxt);
             }else{
                 backToNormal(clubNameTxt,clubLocationTxt,homeGroundTxt);
-                Alert alert = new Alert(Alert.AlertType.NONE,"Club Created", ButtonType.OK);
+                Alert alert = new Alert(Alert.AlertType.NONE,"Club Created Successfully", ButtonType.OK);
                 alert.show();
                 finalPlm.createClub(clubName,location,homeGround);
                 clubNameTxt.clear();
@@ -85,12 +97,13 @@ public class GraphicalInterface {
         });
 
         closeBtn.setOnAction(event -> {
-                finalPlm.saveInstance(finalPlm);
-                System.exit(1);
+//                finalPlm.saveInstance(finalPlm);
+//                System.exit(1);
+            output.setText("Testing");
         });
 
 
-        guiPane.getChildren().addAll(createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl);
+        guiPane.getChildren().addAll(output,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead);
         guiScene = new Scene(guiPane,1000,500);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
 
