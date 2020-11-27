@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 public class PremierLeagueManager implements Serializable,LeagueManager {
 
-    ArrayList<FootballClub> clubsArray = new ArrayList<>();
-    ArrayList<Match> playedMatches = new ArrayList<>();
+    private ArrayList<FootballClub> clubsArray = new ArrayList<>();
+    private ArrayList<Match> playedMatches = new ArrayList<>();
 
     @Override
     public SportsClub createClub() {
@@ -82,14 +82,6 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
 
 //        System.out.println(clubsArray.size());
         sortTable();
-
-//        FootballClub newClub1 = new FootballClub("Spain","Arsenal","Santa Clara",0,0,0,0,0,0,0);
-//        FootballClub newClub2 = new FootballClub("Italy","Chelsea","Venice",0,0,0,0,0,0,0);
-//        FootballClub newClub3 = new FootballClub("Argentina","Barcelona","Stuttgart",0,0,0,0,0,0,0);
-
-//        clubsArray.add(newClub1);
-//        clubsArray.add(newClub2);
-//        clubsArray.add(newClub3);
 
         System.out.println("");
         System.out.println("[[ Points Table ]]");
@@ -187,8 +179,6 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
         }
         System.out.println("");
         System.out.println("");
-
-
     }
 
     public FootballClub getClub(String teamName) {
@@ -243,11 +233,11 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
                     } else if (clubsArray.get(x).getNofPoints() == clubsArray.get(x - 1).getNofPoints()) {
                         if (clubsArray.get(x).getNofGoalsScored() > clubsArray.get(x - 1).getNofGoalsScored()) {
                             Collections.swap(clubsArray, x, x - 1);
+                            }
                         }
                     }
                 }
             }
-        }
         }
 
     public void saveInstance(PremierLeagueManager plm){
