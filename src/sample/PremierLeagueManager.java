@@ -1,11 +1,14 @@
 package sample;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class PremierLeagueManager implements Serializable,LeagueManager {
+public class PremierLeagueManager extends Application implements Serializable,LeagueManager {
 
     private ArrayList<FootballClub> clubsArray = new ArrayList<>();
     private ArrayList<Match> playedMatches = new ArrayList<>();
@@ -71,7 +74,7 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
         System.out.println("3   :   Display Statistics");
         System.out.println("4   :   Display Premier League Table");
         System.out.println("5   :   Add a match");
-        System.out.println("6   :   Save in a file");
+        System.out.println("6   :   Open GUI");
         System.out.println("0   :   To Exit");
         System.out.println(" ");
         System.out.print("Enter your choice : ");
@@ -265,12 +268,20 @@ public class PremierLeagueManager implements Serializable,LeagueManager {
         return plmArray.get(0);
     }
 
+    public void openGUI(){
+        launch();
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        GraphicalInterface.display();
+    }
+
+
     @Override
     public String toString() {
         return "PremierLeagueManager{" +
                 "clubsArray=" + clubsArray +
                 '}';
     }
-
-
 }

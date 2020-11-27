@@ -49,6 +49,8 @@ public class Main {
                     System.out.println("Byee...");
                     plm.saveInstance(plm);
                     System.exit(1);
+                }else if(option==6){
+                    plm.openGUI();
                 }
                     if(plm.decide().equals("x")){
                         System.out.println("");
