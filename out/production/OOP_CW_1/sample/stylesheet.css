@@ -3,7 +3,8 @@
 }
 
 #errorField{
-    -fx-background-color: #F08080;
+    /*-fx-background-color: #F08080;*/
+    -fx-background-color: black;
     -fx-font-size: 18;
     -fx-color: black;
     -fx-text-fill: white;
@@ -33,17 +34,17 @@
     /*-fx-text-fill: #ff6666;*/
     -fx-font-family: "Verdana";
     -fx-background-color: #e57e00;
-    -fx-padding: 10;
+    -fx-padding: 5;
     -fx-border-radius: 20;
 }
 
-#output{
+#divOne{
     -fx-border-width: 5;
     -fx-border-color: black;
     -fx-font-size: 22px;
     -fx-padding: 20;
     -fx-text-alignment: center;
-    -fx-background-color: lightpink;
+    -fx-background-color: white;
     -fx-text-fill: white;
     -fx-font-weight: bold;
 }
@@ -51,4 +52,23 @@
 #createHead{
     -fx-font-size: 23px;
     -fx-font-weight: bold;
+}
+
+#test{
+    -fx-background-color: #d9d9d9;
+}
+
+#date{
+    -fx-font-size: 18;
+    /*-fx-font-weight: bold;*/
+}
+
+#hyphen{
+    -fx-font-size: 50;
+    -fx-font-weight: bold;
+}
+
+#teamTxt{
+    -fx-font-size: 18;
+    /*-fx-font-weight: bold;*/
 }

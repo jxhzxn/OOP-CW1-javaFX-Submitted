@@ -32,8 +32,8 @@ public class GraphicalInterface {
         window.setTitle("Premiere League Manager");
 
         Label headLbl = new Label("Premiere League Manager");
-        headLbl.setLayoutX(260);
-        headLbl.setLayoutY(30);
+        headLbl.setLayoutX(230);
+        headLbl.setLayoutY(20);
         headLbl.setId("headLbl");
 
         Button createClubBtn = new Button("Create Club");
@@ -66,12 +66,76 @@ public class GraphicalInterface {
         createHead.setLayoutY(130);
         createHead.setId("createHead");
 
-        Label output = new Label();
-        output.setPrefHeight(120);
-        output.setPrefWidth(950);
-        output.setLayoutY(110);
-        output.setLayoutX(30);
-        output.setId("output");
+        Label addMatchHead = new Label("Add a Match");
+        addMatchHead.setLayoutX(50);
+        addMatchHead.setLayoutY(280);
+        addMatchHead.setId("createHead");
+
+        Label divOne = new Label();
+        divOne.setPrefHeight(120);
+        divOne.setPrefWidth(950);
+        divOne.setLayoutY(110);
+        divOne.setLayoutX(30);
+        divOne.setId("divOne");
+
+        Label divTwo = new Label();
+        divTwo.setPrefHeight(450);
+        divTwo.setPrefWidth(950);
+        divTwo.setLayoutY(260);
+        divTwo.setLayoutX(30);
+        divTwo.setId("divOne");
+
+        TextField dayTxt = new TextField();
+        dayTxt.setLayoutX(50);
+        dayTxt.setLayoutY(320);
+        dayTxt.setPrefWidth(60);
+        dayTxt.setPrefHeight(50);
+        dayTxt.setPromptText("dd");
+        dayTxt.setId("date");
+
+        TextField monthTxt = new TextField();
+        monthTxt.setLayoutX(150);
+        monthTxt.setLayoutY(320);
+        monthTxt.setPrefWidth(60);
+        monthTxt.setPrefHeight(50);
+        monthTxt.setPromptText("mm");
+        monthTxt.setId("date");
+
+
+        TextField yearTxt = new TextField();
+        yearTxt.setLayoutX(250);
+        yearTxt.setLayoutY(320);
+        yearTxt.setPrefWidth(80);
+        yearTxt.setPrefHeight(50);
+        yearTxt.setPromptText("yyyy");
+        yearTxt.setId("date");
+
+        Label h1 = new Label("-");
+        h1.setLayoutX(120);
+        h1.setLayoutY(310);
+        h1.setId("hyphen");
+
+        Label h2 = new Label("-");
+        h2.setLayoutX(220);
+        h2.setLayoutY(310);
+        h2.setId("hyphen");
+
+        TextField team1Txt = new TextField();
+        team1Txt.setLayoutX(50);
+        team1Txt.setLayoutY(400);
+        team1Txt.setPrefWidth(150);
+        team1Txt.setPrefHeight(50);
+        team1Txt.setPromptText("Team Name 1");
+        team1Txt.setId("teamTxt");
+
+        TextField team2Txt = new TextField();
+        team2Txt.setLayoutX(250);
+        team2Txt.setLayoutY(400);
+        team2Txt.setPrefWidth(150);
+        team2Txt.setPrefHeight(50);
+        team2Txt.setPromptText("Team Name 2");
+        team2Txt.setId("teamTxt");
+
 
         clubNameTxt.setId("textField");
         clubLocationTxt.setId("textField");
@@ -97,15 +161,17 @@ public class GraphicalInterface {
         });
 
         closeBtn.setOnAction(event -> {
-//                finalPlm.saveInstance(finalPlm);
-//                System.exit(1);
-            output.setText("Testing");
+                finalPlm.saveInstance(finalPlm);
+                System.exit(1);
+//            output.setText("Testing");
         });
 
 
-        guiPane.getChildren().addAll(output,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead);
+        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt);
         guiScene = new Scene(guiPane,1000,500);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
+
+        guiPane.setId("test");
 
         window.setScene(guiScene);
         window.show();
