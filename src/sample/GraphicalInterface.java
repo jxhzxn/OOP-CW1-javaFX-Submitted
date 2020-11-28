@@ -1,7 +1,10 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -184,6 +187,24 @@ public class GraphicalInterface {
         clubLocationTxt.setId("textField");
         homeGroundTxt.setId("textField");
 
+        TableView<FootballClub> table = new TableView<>();
+
+        TableColumn<FootballClub,String> nameColumn = new TableColumn<>("Club Name");
+        nameColumn.setMinWidth(250);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
+
+        TableColumn<FootballClub,String> locationColumn = new TableColumn<>("Club Location");
+        locationColumn.setMinWidth(250);
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("clubLocation"));
+
+        table.setItems(testing());
+        table.getColumns().addAll(nameColumn,locationColumn);
+        table.setLayoutX(30);
+        table.setLayoutY(490);
+
+        nameColumn.setId("tableHead");
+        locationColumn.setId("tableHead");
+
         PremierLeagueManager finalPlm = plm;
         createClubBtn.setOnAction(event -> {
 //            PremierLeagueManager testPlm = finalPlm;
@@ -196,7 +217,9 @@ public class GraphicalInterface {
                 backToNormal(clubNameTxt,clubLocationTxt,homeGroundTxt);
                 Alert alert = new Alert(Alert.AlertType.NONE,"Club Created Successfully", ButtonType.OK);
                 alert.show();
+                testing();
                 finalPlm.createClub(clubName,location,homeGround);
+                finalPlm.saveInstance(finalPlm);
                 clubNameTxt.clear();
                 clubLocationTxt.clear();
                 homeGroundTxt.clear();
@@ -216,10 +239,15 @@ public class GraphicalInterface {
 //            dayTxt.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().get(0).getDate().getDay())));
 //            monthTxt.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().get(0).getDate().getMonth())));
 //            yearTxt.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().get(0).getDate().getYear())));
-            team1Txt.setText(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1().getClubName());
-            team1Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1().getNofGoalsScored()));
-            team2Txt.setText(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2().getClubName());
-            team2Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2().getNofGoalsScored()));
+            if(finalPlm.getPlayedMatches().size()==0){
+                Alert alert = new Alert(Alert.AlertType.NONE,"No Matches have been Played", ButtonType.OK);
+                alert.show();
+            }else{
+                team1Txt.setText(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1().getClubName());
+                team1Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1().getNofGoalsScored()));
+                team2Txt.setText(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2().getClubName());
+                team2Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2().getNofGoalsScored()));
+            }
 //            System.out.println(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().get(0).getDate().getDay()));
         });
 
@@ -242,12 +270,29 @@ public class GraphicalInterface {
         });
 
         addMatchBtn.setOnAction(event -> {
-            errorCheck(dayTxt,monthTxt,yearTxt,team1Txt,team1Goals,team2Txt,team2Goals);
+            if(dayTxt.getText().length()==0 || monthTxt.getText().length()==0 || yearTxt.getText().length()==0 || team1Txt.getText().length()==0 || team1Goals.getText().length()==0 || team2Goals.getText().length()==0 || team2Txt.getText().length()==0){
+                errorCheck(dayTxt,monthTxt,yearTxt,team1Txt,team1Goals,team2Txt,team2Goals);
+            }else{
+                Date date = new Date(Integer.parseInt(dayTxt.getText()),Integer.parseInt(monthTxt.getText()),Integer.parseInt(yearTxt.getText()));
+                finalPlm.addMatch(team1Txt.getText(),team2Txt.getText(),Integer.parseInt(team1Goals.getText()),Integer.parseInt(team2Goals.getText()),date);
+                finalPlm.saveInstance(finalPlm);
+                Alert alert = new Alert(Alert.AlertType.NONE,"Match Added Successfully", ButtonType.OK);
+                team1Txt.clear();
+                team1Goals.clear();
+                team2Txt.clear();
+                team2Goals.clear();
+                dayTxt.clear();
+                monthTxt.clear();
+                yearTxt.clear();
+                alert.show();
+                testing();
+            }
+
         });
 
 
-        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,addMatchBtn,lastMatchBtn,lastMatchClearBtn);
-        guiScene = new Scene(guiPane,1000,800);
+        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,addMatchBtn,lastMatchBtn,lastMatchClearBtn,table);
+        guiScene = new Scene(guiPane,1000,930);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
 
         guiPane.setId("test");
@@ -294,5 +339,19 @@ public class GraphicalInterface {
         for(int x=0;x<=texts.size()-1;x++){
             texts.get(x).setId("textField");
         }
+    }
+
+
+
+
+
+    public static ObservableList<FootballClub> testing(){
+        PremierLeagueManager plm = new PremierLeagueManager();
+        plm = plm.getInstance();
+        ObservableList<FootballClub> clubs = FXCollections.observableArrayList();
+        for(FootballClub club: plm.getClubsArray()){
+            clubs.add(club);
+        }
+        return clubs;
     }
 }

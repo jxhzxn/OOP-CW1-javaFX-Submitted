@@ -5,6 +5,6 @@ public interface LeagueManager {
     public void deleteClub(String clubName);
     public void displayStats();
     public void displayTable();
-    public void addMatch();
+    public void addMatch(String team1Name,String team2Name, int team1Score, int team2Score, Date matchDate);
 //    public void fileSave();
 }

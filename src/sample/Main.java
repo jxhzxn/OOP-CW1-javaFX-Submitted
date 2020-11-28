@@ -48,7 +48,28 @@ public class Main {
                 }else if(option==4){
                     plm.displayTable();
                 }else if(option==5){
-                    plm.addMatch();
+                    Scanner input1 = new Scanner(System.in);
+                    Scanner input2 = new Scanner(System.in);
+                    Scanner input3 = new Scanner(System.in);
+                    System.out.println("Add a Match");
+                    System.out.println("-------------------");
+                    System.out.println("");
+                    System.out.print("Enter the Day  :   ");
+                    int day = input1.nextInt();
+                    System.out.print("Enter the Month  :   ");
+                    int month = input1.nextInt();
+                    System.out.print("Enter the Year  :   ");
+                    int year = input1.nextInt();
+                    Date matchDate = new Date(day,month,year);
+                    System.out.print("Team 1    :   ");
+                    String team1Name = input2.nextLine();
+                    System.out.print("Team 2    :   ");
+                    String team2Name = input3.nextLine();
+                    System.out.print(team1Name+" Score    :   ");
+                    int team1Score = input.nextInt();
+                    System.out.print(team2Name+" Score    :   ");
+                    int team2Score = input.nextInt();
+                    plm.addMatch(team1Name,team2Name,team1Score,team2Score,matchDate);
                 }else if(option==3){
                     plm.displayStats();
                 }else if(option==0){

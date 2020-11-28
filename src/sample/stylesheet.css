@@ -79,6 +79,11 @@
     -fx-font-weight: bold;
 }
 
+#tableHead{
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
+}
+
 #divThree{
     /*-fx-border-width: 2;*/
     /*-fx-border-color: black;*/

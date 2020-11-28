@@ -98,29 +98,31 @@ public class PremierLeagueManager extends Application implements Serializable,Le
     }
 
     @Override
-    public void addMatch(){
-        Scanner input = new Scanner(System.in);
-        Scanner input2 = new Scanner(System.in);
-        Scanner input3 = new Scanner(System.in);
+    public void addMatch(String team1Name,String team2Name, int team1Score, int team2Score, Date matchDate){
+//        Scanner input = new Scanner(System.in);
+//        Scanner input2 = new Scanner(System.in);
+//        Scanner input3 = new Scanner(System.in);
+//        String teamWon = null;
+//        System.out.println("Add a Match");
+//        System.out.println("-------------------");
+//        System.out.println("");
+//        System.out.print("Enter the Day  :   ");
+//            int day = input.nextInt();
+//        System.out.print("Enter the Month  :   ");
+//            int month = input.nextInt();
+//        System.out.print("Enter the Year  :   ");
+//            int year = input.nextInt();
+//        Date matchDate = new Date(day,month,year);
+//        System.out.print("Team 1    :   ");
+//        String team1Name = input2.nextLine();
+//        System.out.print("Team 2    :   ");
+//        String team2Name = input3.nextLine();
+//        System.out.print(team1Name+" Score    :   ");
+//            int team1Score = input.nextInt();
+//        System.out.print(team2Name+" Score    :   ");
+//            int team2Score = input.nextInt();
+
         String teamWon = null;
-        System.out.println("Add a Match");
-        System.out.println("-------------------");
-        System.out.println("");
-        System.out.print("Enter the Day  :   ");
-            int day = input.nextInt();
-        System.out.print("Enter the Month  :   ");
-            int month = input.nextInt();
-        System.out.print("Enter the Year  :   ");
-            int year = input.nextInt();
-        Date matchDate = new Date(day,month,year);
-        System.out.print("Team 1    :   ");
-        String team1Name = input2.nextLine();
-        System.out.print("Team 2    :   ");
-        String team2Name = input3.nextLine();
-        System.out.print(team1Name+" Score    :   ");
-            int team1Score = input.nextInt();
-        System.out.print(team2Name+" Score    :   ");
-            int team2Score = input.nextInt();
 
          if(team1Score==team2Score){
 
