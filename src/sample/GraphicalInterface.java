@@ -390,7 +390,13 @@ public class GraphicalInterface {
 
     public static ObservableList<FootballClub> testing(){
         PremierLeagueManager plm = new PremierLeagueManager();
-        plm = plm.getInstance();
+        Path filePath = Paths.get("./plm.ser");
+        if(Files.exists(filePath)){
+            plm = plm.getInstance();
+        }else {
+            plm = new PremierLeagueManager();
+        }
+//        plm = plm.getInstance();
         ObservableList<FootballClub> clubs = FXCollections.observableArrayList();
         for(FootballClub club: plm.getClubsArray()){
             clubs.add(club);
