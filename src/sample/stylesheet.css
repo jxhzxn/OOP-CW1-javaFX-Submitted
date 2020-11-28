@@ -71,4 +71,26 @@
 #teamTxt{
     -fx-font-size: 18;
     /*-fx-font-weight: bold;*/
+    -fx-text-alignment: center;
+}
+
+#vs{
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+}
+
+#divThree{
+    /*-fx-border-width: 2;*/
+    /*-fx-border-color: black;*/
+    -fx-font-size: 22px;
+    -fx-padding: 20;
+    -fx-text-alignment: center;
+    -fx-background-color: lightpink;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#lastMatch{
+    -fx-font-size: 18;
+    -fx-font-weight: bold;
 }

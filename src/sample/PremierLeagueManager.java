@@ -284,4 +284,20 @@ public class PremierLeagueManager extends Application implements Serializable,Le
                 "clubsArray=" + clubsArray +
                 '}';
     }
+
+    public ArrayList<FootballClub> getClubsArray() {
+        return clubsArray;
+    }
+
+    private void setClubsArray(ArrayList<FootballClub> clubsArray) {
+        this.clubsArray = clubsArray;
+    }
+
+    public ArrayList<Match> getPlayedMatches() {
+        return playedMatches;
+    }
+
+    private void setPlayedMatches(ArrayList<Match> playedMatches) {
+        this.playedMatches = playedMatches;
+    }
 }

@@ -79,7 +79,7 @@ public class GraphicalInterface {
         divOne.setId("divOne");
 
         Label divTwo = new Label();
-        divTwo.setPrefHeight(450);
+        divTwo.setPrefHeight(190);
         divTwo.setPrefWidth(950);
         divTwo.setLayoutY(260);
         divTwo.setLayoutX(30);
@@ -121,20 +121,63 @@ public class GraphicalInterface {
         h2.setId("hyphen");
 
         TextField team1Txt = new TextField();
-        team1Txt.setLayoutX(50);
-        team1Txt.setLayoutY(400);
-        team1Txt.setPrefWidth(150);
+        team1Txt.setLayoutX(385);
+        team1Txt.setLayoutY(320);
+        team1Txt.setPrefWidth(170);
         team1Txt.setPrefHeight(50);
         team1Txt.setPromptText("Team Name 1");
         team1Txt.setId("teamTxt");
 
         TextField team2Txt = new TextField();
-        team2Txt.setLayoutX(250);
-        team2Txt.setLayoutY(400);
-        team2Txt.setPrefWidth(150);
+        team2Txt.setLayoutX(685);
+        team2Txt.setLayoutY(320);
+        team2Txt.setPrefWidth(170);
         team2Txt.setPrefHeight(50);
         team2Txt.setPromptText("Team Name 2");
         team2Txt.setId("teamTxt");
+
+        TextField team1Goals = new TextField();
+        team1Goals.setLayoutX(565);
+        team1Goals.setLayoutY(320);
+        team1Goals.setPrefWidth(75);
+        team1Goals.setPrefHeight(50);
+        team1Goals.setPromptText("Goal1");
+        team1Goals.setId("teamTxt");
+
+        Label vs = new Label("vs");
+        vs.setLayoutX(650);
+        vs.setLayoutY(330);
+        vs.setId("vs");
+
+        TextField team2Goals = new TextField();
+        team2Goals.setLayoutX(865);
+        team2Goals.setLayoutY(320);
+        team2Goals.setPrefWidth(75);
+        team2Goals.setPrefHeight(50);
+        team2Goals.setPromptText("Goal2");
+        team2Goals.setId("teamTxt");
+
+        Button addMatchBtn = new Button("Add Match");
+        addMatchBtn.setLayoutX(800);
+        addMatchBtn.setLayoutY(390);
+        addMatchBtn.setPrefWidth(140);
+        addMatchBtn.setPrefHeight(30);
+        addMatchBtn.setId("createClubBtn");
+
+        Button lastMatchBtn = new Button("Show Last Match");
+        lastMatchBtn.setLayoutX(50);
+        lastMatchBtn.setLayoutY(390);
+        lastMatchBtn.setPrefWidth(200);
+        lastMatchBtn.setPrefHeight(30);
+        lastMatchBtn.setId("createClubBtn");
+
+        Button lastMatchClearBtn = new Button("Clear");
+        lastMatchClearBtn.setLayoutX(270);
+        lastMatchClearBtn.setLayoutY(390);
+        lastMatchClearBtn.setPrefWidth(80);
+        lastMatchClearBtn.setPrefHeight(30);
+        lastMatchClearBtn.setId("createClubBtn");
+
 
 
         clubNameTxt.setId("textField");
@@ -167,8 +210,29 @@ public class GraphicalInterface {
         });
 
 
-        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt);
-        guiScene = new Scene(guiPane,1000,500);
+
+
+        lastMatchBtn.setOnAction(event -> {
+//            dayTxt.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().get(0).getDate().getDay())));
+//            monthTxt.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().get(0).getDate().getMonth())));
+//            yearTxt.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().get(0).getDate().getYear())));
+            team1Txt.setText(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1().getClubName());
+            team1Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1().getNofGoalsScored()));
+            team2Txt.setText(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2().getClubName());
+            team2Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2().getNofGoalsScored()));
+//            System.out.println(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().get(0).getDate().getDay()));
+        });
+
+        lastMatchClearBtn.setOnAction(event -> {
+            team1Txt.clear();
+            team1Goals.clear();
+            team2Txt.clear();
+            team2Goals.clear();
+        });
+
+
+        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,addMatchBtn,lastMatchBtn,lastMatchClearBtn);
+        guiScene = new Scene(guiPane,1000,800);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
 
         guiPane.setId("test");
