@@ -189,21 +189,64 @@ public class GraphicalInterface {
 
         TableView<FootballClub> table = new TableView<>();
 
-        TableColumn<FootballClub,String> nameColumn = new TableColumn<>("Club Name");
-        nameColumn.setMinWidth(250);
+        TableColumn<FootballClub,String> nameColumn = new TableColumn<>("Club");
+        nameColumn.setMinWidth(170);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
 
-        TableColumn<FootballClub,String> locationColumn = new TableColumn<>("Club Location");
-        locationColumn.setMinWidth(250);
-        locationColumn.setCellValueFactory(new PropertyValueFactory<>("clubLocation"));
+        TableColumn<FootballClub,String> locationColumn = new TableColumn<>("Location");
+        locationColumn.setMinWidth(140);
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
+
+        TableColumn<FootballClub,String> homeGroundColumn = new TableColumn<>("HomeGround");
+        homeGroundColumn.setMinWidth(300);
+        homeGroundColumn.setCellValueFactory(new PropertyValueFactory<>("homeGround"));
+
+        TableColumn<FootballClub,String> matchesColumn = new TableColumn<>("Matches");
+        matchesColumn.setMinWidth(110);
+        matchesColumn.setCellValueFactory(new PropertyValueFactory<>("nofMatches"));
+
+        TableColumn<FootballClub,String> goalScoredColumn = new TableColumn<>("GoalsS.");
+        goalScoredColumn.setMinWidth(110);
+        goalScoredColumn.setCellValueFactory(new PropertyValueFactory<>("nofGoalsScored"));
+
+        TableColumn<FootballClub,String> goalReceivedColumn = new TableColumn<>("GoalsR.");
+        goalReceivedColumn.setMinWidth(110);
+        goalReceivedColumn.setCellValueFactory(new PropertyValueFactory<>("nofGoalsReceived"));
+
+        TableColumn<FootballClub,String> winsColumn = new TableColumn<>("Wins");
+        winsColumn.setMinWidth(110);
+        winsColumn.setCellValueFactory(new PropertyValueFactory<>("nofWins"));
+
+        TableColumn<FootballClub,String> drawsColumn = new TableColumn<>("Draws");
+        drawsColumn.setMinWidth(110);
+        drawsColumn.setCellValueFactory(new PropertyValueFactory<>("nofDraws"));
+
+        TableColumn<FootballClub,String> defeatsColumn = new TableColumn<>("Defeats");
+        defeatsColumn.setMinWidth(110);
+        defeatsColumn.setCellValueFactory(new PropertyValueFactory<>("nofDefeats"));
+
+        TableColumn<FootballClub,String> pointsColumn = new TableColumn<>("Points");
+        pointsColumn.setMinWidth(110);
+        pointsColumn.setCellValueFactory(new PropertyValueFactory<>("nofPoints"));
 
         table.setItems(testing());
-        table.getColumns().addAll(nameColumn,locationColumn);
+        table.getColumns().addAll(nameColumn,matchesColumn,goalScoredColumn,goalReceivedColumn,winsColumn,drawsColumn,defeatsColumn,pointsColumn);
         table.setLayoutX(30);
         table.setLayoutY(490);
+        table.setPrefWidth(950);
+        table.setPrefHeight(240);
+
 
         nameColumn.setId("tableHead");
         locationColumn.setId("tableHead");
+        homeGroundColumn.setId("tableHead");
+        matchesColumn.setId("tableHead");
+        goalScoredColumn.setId("tableHead");
+        goalReceivedColumn.setId("tableHead");
+        winsColumn.setId("tableHead");
+        drawsColumn.setId("tableHead");
+        defeatsColumn.setId("tableHead");
+        pointsColumn.setId("tableHead");
 
         PremierLeagueManager finalPlm = plm;
         createClubBtn.setOnAction(event -> {
