@@ -125,7 +125,7 @@ public class GraphicalInterface {
         team1Txt.setLayoutY(320);
         team1Txt.setPrefWidth(170);
         team1Txt.setPrefHeight(50);
-        team1Txt.setPromptText("Team Name 1");
+        team1Txt.setPromptText("Club Name");
         team1Txt.setId("teamTxt");
 
         TextField team2Txt = new TextField();
@@ -133,7 +133,7 @@ public class GraphicalInterface {
         team2Txt.setLayoutY(320);
         team2Txt.setPrefWidth(170);
         team2Txt.setPrefHeight(50);
-        team2Txt.setPromptText("Team Name 2");
+        team2Txt.setPromptText("Club Name");
         team2Txt.setId("teamTxt");
 
         TextField team1Goals = new TextField();
@@ -141,7 +141,7 @@ public class GraphicalInterface {
         team1Goals.setLayoutY(320);
         team1Goals.setPrefWidth(75);
         team1Goals.setPrefHeight(50);
-        team1Goals.setPromptText("Goal1");
+        team1Goals.setPromptText("Goal");
         team1Goals.setId("teamTxt");
 
         Label vs = new Label("vs");
@@ -154,7 +154,7 @@ public class GraphicalInterface {
         team2Goals.setLayoutY(320);
         team2Goals.setPrefWidth(75);
         team2Goals.setPrefHeight(50);
-        team2Goals.setPromptText("Goal2");
+        team2Goals.setPromptText("Goal");
         team2Goals.setId("teamTxt");
 
         Button addMatchBtn = new Button("Add Match");
@@ -228,6 +228,21 @@ public class GraphicalInterface {
             team1Goals.clear();
             team2Txt.clear();
             team2Goals.clear();
+            dayTxt.clear();
+            monthTxt.clear();
+            yearTxt.clear();
+
+            team1Txt.setId("teamTxt");
+            team1Goals.setId("teamTxt");
+            team2Txt.setId("teamTxt");
+            team2Goals.setId("teamTxt");
+            dayTxt.setId("teamTxt");
+            monthTxt.setId("teamTxt");
+            yearTxt.setId("teamTxt");
+        });
+
+        addMatchBtn.setOnAction(event -> {
+            errorCheck(dayTxt,monthTxt,yearTxt,team1Txt,team1Goals,team2Txt,team2Goals);
         });
 
 
@@ -242,11 +257,26 @@ public class GraphicalInterface {
     }
 
 
-    public static void errorCheck(TextField clubName, TextField location, TextField homeGround){
+//    public static void errorCheck(TextField clubName, TextField location, TextField homeGround){
+//        ArrayList<TextField> texts = new ArrayList<>();
+//        texts.add(clubName);
+//        texts.add(location);
+//        texts.add(homeGround);
+//        for(int x=0;x<=texts.size()-1;x++){
+//            if(texts.get(x).getText().length()==0){
+//                texts.get(x).setId("errorField");
+//            }else{
+//                texts.get(x).setId("textField");
+//            }
+//        }
+//    }
+
+    public static void errorCheck(TextField... textField){
         ArrayList<TextField> texts = new ArrayList<>();
-        texts.add(clubName);
-        texts.add(location);
-        texts.add(homeGround);
+        for(TextField text: textField){
+            texts.add(text);
+        }
+
         for(int x=0;x<=texts.size()-1;x++){
             if(texts.get(x).getText().length()==0){
                 texts.get(x).setId("errorField");

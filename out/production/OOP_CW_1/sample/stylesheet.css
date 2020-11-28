@@ -70,7 +70,7 @@
 
 #teamTxt{
     -fx-font-size: 18;
-    /*-fx-font-weight: bold;*/
+    -fx-font-weight: bold;
     -fx-text-alignment: center;
 }
 
