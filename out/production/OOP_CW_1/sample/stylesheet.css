@@ -11,11 +11,15 @@
 }
 
 #closeBtn{
-    -fx-background-color: crimson;
+    -fx-background-color: #dc143c;
     -fx-font-size: 18;
     -fx-font-weight: bolder;
     -fx-border-color: black;
    -fx-border-width: 5;
+}
+
+#closeBtn:hover{
+    -fx-background-color: #b01030;
 }
 
 #createClubBtn{
@@ -30,8 +34,12 @@
 
 #clearBtn{
     -fx-font-size: 18;
-    -fx-background-color: crimson;
+    -fx-background-color: #dc143c;
     -fx-font-weight: bold;
+}
+
+#clearBtn:hover{
+    -fx-background-color: #b01030;
 }
 
 #headLbl{

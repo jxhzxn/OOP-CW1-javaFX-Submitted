@@ -36,7 +36,7 @@ public class GraphicalInterface {
 
         Label headLbl = new Label("Premiere League Manager");
         headLbl.setLayoutX(230);
-        headLbl.setLayoutY(20);
+        headLbl.setLayoutY(25);
         headLbl.setId("headLbl");
 
         Button createClubBtn = new Button("Create Club");
@@ -229,7 +229,7 @@ public class GraphicalInterface {
         pointsColumn.setMinWidth(90);
         pointsColumn.setCellValueFactory(new PropertyValueFactory<>("nofPoints"));
 
-        table.setItems(testing());
+        table.setItems(getData());
         table.getColumns().addAll(nameColumn,matchesColumn,goalScoredColumn,goalReceivedColumn,winsColumn,drawsColumn,defeatsColumn,pointsColumn);
         table.setLayoutX(30);
         table.setLayoutY(490);
@@ -284,7 +284,7 @@ public class GraphicalInterface {
                 alert.show();
                 finalPlm.createClub(clubName,location,homeGround);
                 finalPlm.saveInstance(finalPlm);
-                table.setItems(jxhzxn());
+                table.setItems(refresh());
                 clubNameTxt.clear();
                 clubLocationTxt.clear();
                 homeGroundTxt.clear();
@@ -309,9 +309,12 @@ public class GraphicalInterface {
                 alert.show();
             }else{
                 team1Txt.setText(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1().getClubName());
-                team1Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1().getNofGoalsScored()));
+//                team1Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1().getNofGoalsScored()));
                 team2Txt.setText(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2().getClubName());
-                team2Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2().getNofGoalsScored()));
+//                team2Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2().getNofGoalsScored()));
+                team1Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam1Score()));
+                team2Goals.setText(String.valueOf(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().size()-1).getTeam2Score()));
+
             }
 //            System.out.println(finalPlm.getPlayedMatches().get(finalPlm.getPlayedMatches().get(0).getDate().getDay()));
         });
@@ -350,7 +353,7 @@ public class GraphicalInterface {
                 monthTxt.clear();
                 yearTxt.clear();
                 alert.show();
-                table.setItems(jxhzxn());
+                table.setItems(refresh());
             }
 
         });
@@ -410,7 +413,7 @@ public class GraphicalInterface {
 
 
 
-    public static ObservableList<FootballClub> testing(){
+    public static ObservableList<FootballClub> getData(){
         PremierLeagueManager plm = new PremierLeagueManager();
         Path filePath = Paths.get("./plm.ser");
         if(Files.exists(filePath)){
@@ -427,7 +430,7 @@ public class GraphicalInterface {
         return clubs;
     }
 
-    public static ObservableList<FootballClub> jxhzxn(){
+    public static ObservableList<FootballClub> refresh(){
         PremierLeagueManager plm = new PremierLeagueManager();
         plm = plm.getInstance();
         plm.sortTable();
