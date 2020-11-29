@@ -364,7 +364,7 @@ public class GraphicalInterface {
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
 
         guiPane.setId("test");
-
+        window.setResizable(false);
         window.setScene(guiScene);
         window.show();
     }
