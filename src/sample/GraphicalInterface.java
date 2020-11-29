@@ -179,7 +179,7 @@ public class GraphicalInterface {
         lastMatchClearBtn.setLayoutY(390);
         lastMatchClearBtn.setPrefWidth(80);
         lastMatchClearBtn.setPrefHeight(30);
-        lastMatchClearBtn.setId("createClubBtn");
+        lastMatchClearBtn.setId("clearBtn");
 
 
 
@@ -190,7 +190,7 @@ public class GraphicalInterface {
         TableView<FootballClub> table = new TableView<>();
 
         TableColumn<FootballClub,String> nameColumn = new TableColumn<>("Club");
-        nameColumn.setMinWidth(170);
+        nameColumn.setMinWidth(160);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
 
         TableColumn<FootballClub,String> locationColumn = new TableColumn<>("Location");
@@ -226,7 +226,7 @@ public class GraphicalInterface {
         defeatsColumn.setCellValueFactory(new PropertyValueFactory<>("nofDefeats"));
 
         TableColumn<FootballClub,String> pointsColumn = new TableColumn<>("Points");
-        pointsColumn.setMinWidth(110);
+        pointsColumn.setMinWidth(90);
         pointsColumn.setCellValueFactory(new PropertyValueFactory<>("nofPoints"));
 
         table.setItems(testing());
@@ -235,6 +235,7 @@ public class GraphicalInterface {
         table.setLayoutY(490);
         table.setPrefWidth(950);
         table.setPrefHeight(240);
+        table.setId("table");
 
 
         nameColumn.setId("tableHead");
@@ -248,6 +249,27 @@ public class GraphicalInterface {
         defeatsColumn.setId("tableHead");
         pointsColumn.setId("tableHead");
 
+        nameColumn.setSortable(false);
+        locationColumn.setSortable(false);
+        homeGroundColumn.setSortable(false);
+        matchesColumn.setSortable(false);
+        goalScoredColumn.setSortable(false);
+        goalReceivedColumn.setSortable(false);
+        winsColumn.setSortable(false);
+        drawsColumn.setSortable(false);
+        defeatsColumn.setSortable(false);
+        pointsColumn.setSortable(false);
+
+
+
+
+
+
+
+
+
+
+
         PremierLeagueManager finalPlm = plm;
         createClubBtn.setOnAction(event -> {
 //            PremierLeagueManager testPlm = finalPlm;
@@ -260,9 +282,9 @@ public class GraphicalInterface {
                 backToNormal(clubNameTxt,clubLocationTxt,homeGroundTxt);
                 Alert alert = new Alert(Alert.AlertType.NONE,"Club Created Successfully", ButtonType.OK);
                 alert.show();
-                testing();
                 finalPlm.createClub(clubName,location,homeGround);
                 finalPlm.saveInstance(finalPlm);
+                table.setItems(jxhzxn());
                 clubNameTxt.clear();
                 clubLocationTxt.clear();
                 homeGroundTxt.clear();
@@ -328,14 +350,14 @@ public class GraphicalInterface {
                 monthTxt.clear();
                 yearTxt.clear();
                 alert.show();
-                testing();
+                table.setItems(jxhzxn());
             }
 
         });
 
 
         guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,addMatchBtn,lastMatchBtn,lastMatchClearBtn,table);
-        guiScene = new Scene(guiPane,1000,930);
+        guiScene = new Scene(guiPane,1000,760);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
 
         guiPane.setId("test");
@@ -397,6 +419,18 @@ public class GraphicalInterface {
             plm = new PremierLeagueManager();
         }
 //        plm = plm.getInstance();
+        ObservableList<FootballClub> clubs = FXCollections.observableArrayList();
+        plm.sortTable();
+        for(FootballClub club: plm.getClubsArray()){
+            clubs.add(club);
+        }
+        return clubs;
+    }
+
+    public static ObservableList<FootballClub> jxhzxn(){
+        PremierLeagueManager plm = new PremierLeagueManager();
+        plm = plm.getInstance();
+        plm.sortTable();
         ObservableList<FootballClub> clubs = FXCollections.observableArrayList();
         for(FootballClub club: plm.getClubsArray()){
             clubs.add(club);

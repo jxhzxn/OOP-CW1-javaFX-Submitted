@@ -28,6 +28,12 @@
     -fx-background-color: #e57e00;
 }
 
+#clearBtn{
+    -fx-font-size: 18;
+    -fx-background-color: crimson;
+    -fx-font-weight: bold;
+}
+
 #headLbl{
     -fx-font-size: 35;
     -fx-font-weight: bold;
@@ -98,4 +104,9 @@
 #lastMatch{
     -fx-font-size: 18;
     -fx-font-weight: bold;
+}
+
+#table{
+    -fx-border-width: 5;
+    -fx-border-color: black;
 }
