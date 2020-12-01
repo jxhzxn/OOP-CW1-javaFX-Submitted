@@ -21,6 +21,10 @@ public class Match implements Serializable {
         return date;
     }
 
+    public String getDatePrint() {
+        return date.getDay()+"-"+date.getMonth()+"-"+date.getYear();
+    }
+
     public void setDate(Date date) {
         this.date = date;
     }
@@ -29,12 +33,20 @@ public class Match implements Serializable {
         return team1;
     }
 
+    public String getTeam1Name() {
+        return team1.getClubName();
+    }
+
     public void setTeam1(FootballClub team1) {
         this.team1 = team1;
     }
 
     public FootballClub getTeam2() {
         return team2;
+    }
+
+    public String getTeam2Name() {
+        return team2.getClubName();
     }
 
     public void setTeam2(FootballClub team2) {

@@ -270,6 +270,43 @@ public class GraphicalInterface {
         pointsColumn.setSortable(false);
 
 
+        TableView<Match> matchTable = new TableView<>();
+
+        TableColumn<Match,String> dateColumn = new TableColumn<>("Date");
+        dateColumn.setMinWidth(120);
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("DatePrint"));
+
+        TableColumn<Match,String> team1Column = new TableColumn<>("Team1");
+        team1Column.setMinWidth(130);
+        team1Column.setCellValueFactory(new PropertyValueFactory<>("team1Name"));
+
+        TableColumn<Match,String> team1ScoreColumn = new TableColumn<>("Team1Goals");
+        team1ScoreColumn.setMinWidth(150);
+        team1ScoreColumn.setCellValueFactory(new PropertyValueFactory<>("team1Score"));
+
+        TableColumn<Match,String> team2Column = new TableColumn<>("Team2");
+        team2Column.setMinWidth(130);
+        team2Column.setCellValueFactory(new PropertyValueFactory<>("team2Name"));
+
+        TableColumn<Match,String> team2ScoreColumn = new TableColumn<>("Team2Goals");
+        team2ScoreColumn.setMinWidth(150);
+        team2ScoreColumn.setCellValueFactory(new PropertyValueFactory<>("team2Score"));
+
+        matchTable.setItems(getMatches());  //TODOO
+        matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
+        matchTable.setLayoutX(30);
+        matchTable.setLayoutY(480);
+        matchTable.setPrefWidth(675);
+        matchTable.setPrefHeight(330);
+        matchTable.setId("table");
+
+        dateColumn.setId("tableHead");
+        team1Column.setId("tableHead");
+        team1ScoreColumn.setId("tableHead");
+        team2Column.setId("tableHead");
+        team2ScoreColumn.setId("tableHead");
+
+
 
 
 
@@ -363,6 +400,7 @@ public class GraphicalInterface {
                 yearTxt.clear();
                 alert.show();
                 table.setItems(refresh());
+                matchTable.setItems(getMatches());
             }
 
         });
@@ -387,11 +425,12 @@ public class GraphicalInterface {
             Alert alert = new Alert(Alert.AlertType.NONE,"Random Match Added Successfully", ButtonType.OK);
             alert.show();
             table.setItems(refresh());
+            matchTable.setItems(getMatches());
         });
 
 
-        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,addMatchBtn,lastMatchBtn,lastMatchClearBtn,table,randomMatchBtn);
-        guiScene = new Scene(guiPane,1850,760);
+        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,addMatchBtn,lastMatchBtn,lastMatchClearBtn,table,randomMatchBtn,matchTable);
+        guiScene = new Scene(guiPane,1850,830);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
         window.initStyle(StageStyle.UNIFIED);
         guiPane.setId("test");
@@ -467,5 +506,22 @@ public class GraphicalInterface {
             clubs.add(club);
         }
         return clubs;
+    }
+
+    public static ObservableList<Match> getMatches(){
+        PremierLeagueManager plm = new PremierLeagueManager();
+        Path filePath = Paths.get("./plm.ser");
+        if(Files.exists(filePath)){
+            plm = plm.getInstance();
+        }else {
+            plm = new PremierLeagueManager();
+        }
+//        plm = plm.getInstance();
+        ObservableList<Match> matches = FXCollections.observableArrayList();
+//        plm.sortTable();
+        for(Match match: plm.getPlayedMatches()){
+            matches.add(match);
+        }
+        return matches;
     }
 }
