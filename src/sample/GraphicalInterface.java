@@ -7,11 +7,13 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GraphicalInterface {
     public static void display(){
@@ -167,6 +169,13 @@ public class GraphicalInterface {
         addMatchBtn.setPrefHeight(30);
         addMatchBtn.setId("createClubBtn");
 
+        Button randomMatchBtn = new Button("Add Random Match");
+        randomMatchBtn.setLayoutX(550);
+        randomMatchBtn.setLayoutY(390);
+        randomMatchBtn.setPrefWidth(230);
+        randomMatchBtn.setPrefHeight(30);
+        randomMatchBtn.setId("createClubBtn");
+
         Button lastMatchBtn = new Button("Show Last Match");
         lastMatchBtn.setLayoutX(50);
         lastMatchBtn.setLayoutY(390);
@@ -190,11 +199,11 @@ public class GraphicalInterface {
         TableView<FootballClub> table = new TableView<>();
 
         TableColumn<FootballClub,String> nameColumn = new TableColumn<>("Club");
-        nameColumn.setMinWidth(160);
+        nameColumn.setMinWidth(130);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("clubName"));
 
         TableColumn<FootballClub,String> locationColumn = new TableColumn<>("Location");
-        locationColumn.setMinWidth(140);
+        locationColumn.setMinWidth(130);
         locationColumn.setCellValueFactory(new PropertyValueFactory<>("location"));
 
         TableColumn<FootballClub,String> homeGroundColumn = new TableColumn<>("HomeGround");
@@ -206,19 +215,19 @@ public class GraphicalInterface {
         matchesColumn.setCellValueFactory(new PropertyValueFactory<>("nofMatches"));
 
         TableColumn<FootballClub,String> goalScoredColumn = new TableColumn<>("GoalsS.");
-        goalScoredColumn.setMinWidth(110);
+        goalScoredColumn.setMinWidth(100);
         goalScoredColumn.setCellValueFactory(new PropertyValueFactory<>("nofGoalsScored"));
 
         TableColumn<FootballClub,String> goalReceivedColumn = new TableColumn<>("GoalsR.");
-        goalReceivedColumn.setMinWidth(110);
+        goalReceivedColumn.setMinWidth(100);
         goalReceivedColumn.setCellValueFactory(new PropertyValueFactory<>("nofGoalsReceived"));
 
         TableColumn<FootballClub,String> winsColumn = new TableColumn<>("Wins");
-        winsColumn.setMinWidth(110);
+        winsColumn.setMinWidth(80);
         winsColumn.setCellValueFactory(new PropertyValueFactory<>("nofWins"));
 
         TableColumn<FootballClub,String> drawsColumn = new TableColumn<>("Draws");
-        drawsColumn.setMinWidth(110);
+        drawsColumn.setMinWidth(80);
         drawsColumn.setCellValueFactory(new PropertyValueFactory<>("nofDraws"));
 
         TableColumn<FootballClub,String> defeatsColumn = new TableColumn<>("Defeats");
@@ -231,10 +240,10 @@ public class GraphicalInterface {
 
         table.setItems(getData());
         table.getColumns().addAll(nameColumn,matchesColumn,goalScoredColumn,goalReceivedColumn,winsColumn,drawsColumn,defeatsColumn,pointsColumn);
-        table.setLayoutX(30);
-        table.setLayoutY(490);
-        table.setPrefWidth(950);
-        table.setPrefHeight(240);
+        table.setLayoutX(1000);
+        table.setLayoutY(110);
+        table.setPrefWidth(820);
+        table.setPrefHeight(500);
         table.setId("table");
 
 
@@ -358,11 +367,33 @@ public class GraphicalInterface {
 
         });
 
+        randomMatchBtn.setOnAction(event -> {
+            int team1Name = ThreadLocalRandom.current().nextInt(0, finalPlm.getClubsArray().size());
+            int team2Name = ThreadLocalRandom.current().nextInt(0, finalPlm.getClubsArray().size());
+            int team1Score = ThreadLocalRandom.current().nextInt(0, 6);
+            int team2Score = ThreadLocalRandom.current().nextInt(0, 6);
+            int day = ThreadLocalRandom.current().nextInt(1, 32);
+            int month = ThreadLocalRandom.current().nextInt(1, 13);
+//            int year = ThreadLocalRandom.current().nextInt(20, 32);
 
-        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,addMatchBtn,lastMatchBtn,lastMatchClearBtn,table);
-        guiScene = new Scene(guiPane,1000,760);
+            Date randomDate = new Date(day,month,2020);
+
+            while(team1Name==team2Name){
+                team2Name = ThreadLocalRandom.current().nextInt(0, finalPlm.getClubsArray().size());
+            }
+
+            finalPlm.addMatch(finalPlm.getClubsArray().get(team1Name).getClubName(),finalPlm.getClubsArray().get(team2Name).getClubName(),team1Score,team2Score,randomDate);
+            finalPlm.saveInstance(finalPlm);
+            Alert alert = new Alert(Alert.AlertType.NONE,"Random Match Added Successfully", ButtonType.OK);
+            alert.show();
+            table.setItems(refresh());
+        });
+
+
+        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,addMatchBtn,lastMatchBtn,lastMatchClearBtn,table,randomMatchBtn);
+        guiScene = new Scene(guiPane,1850,760);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
-
+        window.initStyle(StageStyle.UNIFIED);
         guiPane.setId("test");
         window.setResizable(false);
         window.setScene(guiScene);
@@ -408,9 +439,6 @@ public class GraphicalInterface {
             texts.get(x).setId("textField");
         }
     }
-
-
-
 
 
     public static ObservableList<FootballClub> getData(){
