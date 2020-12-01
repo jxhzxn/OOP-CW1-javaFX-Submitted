@@ -214,14 +214,21 @@ public class GraphicalInterface {
 
         Button showMatchBtn = new Button("Show Matches");
         showMatchBtn.setLayoutX(50);
-        showMatchBtn.setLayoutY(600);
-        showMatchBtn.setPrefWidth(220);
+        showMatchBtn.setLayoutY(610);
+        showMatchBtn.setPrefWidth(180);
         showMatchBtn.setPrefHeight(30);
         showMatchBtn.setId("createClubBtn");
 
+        Button clearBtn = new Button("Clear");
+        clearBtn.setLayoutX(250);
+        clearBtn.setLayoutY(610);
+        clearBtn.setPrefWidth(80);
+        clearBtn.setPrefHeight(30);
+        clearBtn.setId("clearBtn");
+
         Button showAllMatchBtn = new Button("Show All Matches");
         showAllMatchBtn.setLayoutX(50);
-        showAllMatchBtn.setLayoutY(600);
+        showAllMatchBtn.setLayoutY(750);
         showAllMatchBtn.setPrefWidth(220);
         showAllMatchBtn.setPrefHeight(30);
         showAllMatchBtn.setId("createClubBtn");
@@ -385,10 +392,7 @@ public class GraphicalInterface {
 
 
 
-        showAllMatchBtn.setOnAction(event -> {
-            matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
-            showAllMatchBtn.setDisable(true);
-        });
+
 
         PremierLeagueManager finalPlm = plm;
         createClubBtn.setOnAction(event -> {
@@ -414,6 +418,22 @@ public class GraphicalInterface {
         closeBtn.setOnAction(event -> {
             finalPlm.saveInstance(finalPlm);
             System.exit(1);
+        });
+
+        clearBtn.setOnAction(event -> {
+            dayTxt2.clear();
+            monthTxt2.clear();
+            yearTxt2.clear();
+        });
+
+        showMatchBtn.setOnAction(event -> {
+            matchesHead.setText("Matches");
+        });
+
+        showAllMatchBtn.setOnAction(event -> {
+            matchesHead.setText("All Played Matches");
+//            matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
+//            showAllMatchBtn.setDisable(true);
         });
 
 
@@ -506,7 +526,7 @@ public class GraphicalInterface {
                 divOne,divTwo,divThree,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,
                 createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,
                 addMatchBtn,lastMatchBtn,lastMatchClearBtn,table,randomMatchBtn,matchTable,showAllMatchBtn,viewMatchHead,
-                dayTxt2,monthTxt2,yearTxt2,h12,h22,pointsTableHead,matchesHead
+                dayTxt2,monthTxt2,yearTxt2,h12,h22,pointsTableHead,matchesHead,showMatchBtn,clearBtn
         );
         guiScene = new Scene(guiPane,1850,830);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
