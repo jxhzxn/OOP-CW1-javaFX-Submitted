@@ -76,6 +76,21 @@ public class GraphicalInterface {
         addMatchHead.setLayoutY(280);
         addMatchHead.setId("createHead");
 
+        Label viewMatchHead = new Label("View Matches");
+        viewMatchHead.setLayoutX(50);
+        viewMatchHead.setLayoutY(500);
+        viewMatchHead.setId("createHead");
+
+        Label pointsTableHead = new Label("Points Table");
+        pointsTableHead.setLayoutX(1020);
+        pointsTableHead.setLayoutY(115);
+        pointsTableHead.setId("createHead");
+
+        Label matchesHead = new Label("All Played Matches");
+        matchesHead.setLayoutX(420);
+        matchesHead.setLayoutY(485);
+        matchesHead.setId("createHead");
+
         Label divOne = new Label();
         divOne.setPrefHeight(120);
         divOne.setPrefWidth(950);
@@ -89,6 +104,13 @@ public class GraphicalInterface {
         divTwo.setLayoutY(260);
         divTwo.setLayoutX(30);
         divTwo.setId("divOne");
+
+        Label divThree = new Label();
+        divThree.setPrefHeight(330);
+        divThree.setPrefWidth(350);
+        divThree.setLayoutY(480);
+        divThree.setLayoutX(30);
+        divThree.setId("divOne");
 
         TextField dayTxt = new TextField();
         dayTxt.setLayoutX(50);
@@ -190,6 +212,20 @@ public class GraphicalInterface {
         lastMatchClearBtn.setPrefHeight(30);
         lastMatchClearBtn.setId("clearBtn");
 
+        Button showMatchBtn = new Button("Show Matches");
+        showMatchBtn.setLayoutX(50);
+        showMatchBtn.setLayoutY(600);
+        showMatchBtn.setPrefWidth(220);
+        showMatchBtn.setPrefHeight(30);
+        showMatchBtn.setId("createClubBtn");
+
+        Button showAllMatchBtn = new Button("Show All Matches");
+        showAllMatchBtn.setLayoutX(50);
+        showAllMatchBtn.setLayoutY(600);
+        showAllMatchBtn.setPrefWidth(220);
+        showAllMatchBtn.setPrefHeight(30);
+        showAllMatchBtn.setId("createClubBtn");
+
 
 
         clubNameTxt.setId("textField");
@@ -241,9 +277,9 @@ public class GraphicalInterface {
         table.setItems(getData());
         table.getColumns().addAll(nameColumn,matchesColumn,goalScoredColumn,goalReceivedColumn,winsColumn,drawsColumn,defeatsColumn,pointsColumn);
         table.setLayoutX(1000);
-        table.setLayoutY(110);
+        table.setLayoutY(160);
         table.setPrefWidth(820);
-        table.setPrefHeight(500);
+        table.setPrefHeight(650);
         table.setId("table");
 
 
@@ -280,24 +316,24 @@ public class GraphicalInterface {
         team1Column.setMinWidth(130);
         team1Column.setCellValueFactory(new PropertyValueFactory<>("team1Name"));
 
-        TableColumn<Match,String> team1ScoreColumn = new TableColumn<>("Team1Goals");
-        team1ScoreColumn.setMinWidth(150);
+        TableColumn<Match,String> team1ScoreColumn = new TableColumn<>("Goals");
+        team1ScoreColumn.setMinWidth(80);
         team1ScoreColumn.setCellValueFactory(new PropertyValueFactory<>("team1Score"));
 
         TableColumn<Match,String> team2Column = new TableColumn<>("Team2");
         team2Column.setMinWidth(130);
         team2Column.setCellValueFactory(new PropertyValueFactory<>("team2Name"));
 
-        TableColumn<Match,String> team2ScoreColumn = new TableColumn<>("Team2Goals");
-        team2ScoreColumn.setMinWidth(150);
+        TableColumn<Match,String> team2ScoreColumn = new TableColumn<>("Goals");
+        team2ScoreColumn.setMinWidth(80);
         team2ScoreColumn.setCellValueFactory(new PropertyValueFactory<>("team2Score"));
 
         matchTable.setItems(getMatches());  //TODOO
-        matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
-        matchTable.setLayoutX(30);
-        matchTable.setLayoutY(480);
-        matchTable.setPrefWidth(675);
-        matchTable.setPrefHeight(330);
+//        matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
+        matchTable.setLayoutX(400);
+        matchTable.setLayoutY(530);
+        matchTable.setPrefWidth(580);
+        matchTable.setPrefHeight(280);
         matchTable.setId("table");
 
         dateColumn.setId("tableHead");
@@ -306,6 +342,40 @@ public class GraphicalInterface {
         team2Column.setId("tableHead");
         team2ScoreColumn.setId("tableHead");
 
+        TextField dayTxt2 = new TextField();
+        dayTxt2.setLayoutX(50);
+        dayTxt2.setLayoutY(540);
+        dayTxt2.setPrefWidth(60);
+        dayTxt2.setPrefHeight(50);
+        dayTxt2.setPromptText("dd");
+        dayTxt2.setId("date");
+
+        TextField monthTxt2 = new TextField();
+        monthTxt2.setLayoutX(150);
+        monthTxt2.setLayoutY(540);
+        monthTxt2.setPrefWidth(60);
+        monthTxt2.setPrefHeight(50);
+        monthTxt2.setPromptText("mm");
+        monthTxt2.setId("date");
+
+
+        TextField yearTxt2 = new TextField();
+        yearTxt2.setLayoutX(250);
+        yearTxt2.setLayoutY(540);
+        yearTxt2.setPrefWidth(80);
+        yearTxt2.setPrefHeight(50);
+        yearTxt2.setPromptText("yyyy");
+        yearTxt2.setId("date");
+
+        Label h12 = new Label("-");
+        h12.setLayoutX(120);
+        h12.setLayoutY(530);
+        h12.setId("hyphen");
+
+        Label h22 = new Label("-");
+        h22.setLayoutX(220);
+        h22.setLayoutY(530);
+        h22.setId("hyphen");
 
 
 
@@ -315,6 +385,10 @@ public class GraphicalInterface {
 
 
 
+        showAllMatchBtn.setOnAction(event -> {
+            matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
+            showAllMatchBtn.setDisable(true);
+        });
 
         PremierLeagueManager finalPlm = plm;
         createClubBtn.setOnAction(event -> {
@@ -338,9 +412,8 @@ public class GraphicalInterface {
         });
 
         closeBtn.setOnAction(event -> {
-                finalPlm.saveInstance(finalPlm);
-                System.exit(1);
-//            output.setText("Testing");
+            finalPlm.saveInstance(finalPlm);
+            System.exit(1);
         });
 
 
@@ -429,7 +502,12 @@ public class GraphicalInterface {
         });
 
 
-        guiPane.getChildren().addAll(divOne,divTwo,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,addMatchBtn,lastMatchBtn,lastMatchClearBtn,table,randomMatchBtn,matchTable);
+        guiPane.getChildren().addAll(
+                divOne,divTwo,divThree,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,
+                createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,
+                addMatchBtn,lastMatchBtn,lastMatchClearBtn,table,randomMatchBtn,matchTable,showAllMatchBtn,viewMatchHead,
+                dayTxt2,monthTxt2,yearTxt2,h12,h22,pointsTableHead,matchesHead
+        );
         guiScene = new Scene(guiPane,1850,830);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
         window.initStyle(StageStyle.UNIFIED);
