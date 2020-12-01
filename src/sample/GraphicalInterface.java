@@ -37,7 +37,7 @@ public class GraphicalInterface {
         window.setTitle("Premiere League Manager");
 
         Label headLbl = new Label("Premiere League Manager");
-        headLbl.setLayoutX(230);
+        headLbl.setLayoutX(650);
         headLbl.setLayoutY(25);
         headLbl.setId("headLbl");
 
@@ -47,7 +47,7 @@ public class GraphicalInterface {
         createClubBtn.setId("createClubBtn");
 
         Button closeBtn = new Button("[X]");
-        closeBtn.setLayoutX(880);
+        closeBtn.setLayoutX(1750);
         closeBtn.setLayoutY(30);
         closeBtn.setId("closeBtn");
 
@@ -428,12 +428,17 @@ public class GraphicalInterface {
 
         showMatchBtn.setOnAction(event -> {
             matchesHead.setText("Matches");
+            showAllMatchBtn.setDisable(false);
+            matchTable.getColumns().clear();
+            showMatchBtn.setDisable(true);
         });
 
         showAllMatchBtn.setOnAction(event -> {
             matchesHead.setText("All Played Matches");
-//            matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
-//            showAllMatchBtn.setDisable(true);
+            matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
+            showAllMatchBtn.setDisable(true);
+            showMatchBtn.setDisable(false);
+
         });
 
 
