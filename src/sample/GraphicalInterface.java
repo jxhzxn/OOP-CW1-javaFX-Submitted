@@ -18,6 +18,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class GraphicalInterface {
     public static void display(){
 
+        ArrayList<Integer> intPasser = new ArrayList<>();
+
         Path filePath = Paths.get("./plm.ser");
 
         PremierLeagueManager plm = new PremierLeagueManager();
@@ -335,7 +337,6 @@ public class GraphicalInterface {
         team2ScoreColumn.setMinWidth(80);
         team2ScoreColumn.setCellValueFactory(new PropertyValueFactory<>("team2Score"));
 
-        matchTable.setItems(getMatches());  //TODOO
 //        matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
         matchTable.setLayoutX(400);
         matchTable.setLayoutY(530);
@@ -416,8 +417,12 @@ public class GraphicalInterface {
         });
 
         closeBtn.setOnAction(event -> {
-            finalPlm.saveInstance(finalPlm);
-            System.exit(1);
+//            finalPlm.saveInstance(finalPlm);
+//            System.exit(1);
+//            System.out.println(finalPlm.getFilteredMatches(2,2,1999).get(0).getTeam1().getClubName());
+            System.out.println("Year: "+finalPlm.getPlayedMatches().get(0).getDate().getYear());
+            System.out.println("Month: "+finalPlm.getPlayedMatches().get(0).getDate().getMonth());
+            System.out.println("Day: "+finalPlm.getPlayedMatches().get(0).getDate().getDay());
         });
 
         clearBtn.setOnAction(event -> {
@@ -426,15 +431,25 @@ public class GraphicalInterface {
             yearTxt2.clear();
         });
 
+
+
         showMatchBtn.setOnAction(event -> {
             matchesHead.setText("Matches");
             showAllMatchBtn.setDisable(false);
             matchTable.getColumns().clear();
             showMatchBtn.setDisable(true);
+            if(dayTxt2.getText().length()==0 || monthTxt2.getText().length()==0 || yearTxt2.getText().length()==0){
+                errorCheck(dayTxt2,monthTxt2,yearTxt2);
+            }else{
+                matchTable.setItems(getFilteredMatches(Integer.parseInt(dayTxt2.getText()),Integer.parseInt(monthTxt2.getText()),Integer.parseInt(yearTxt2.getText())));
+                matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
+            }
         });
 
         showAllMatchBtn.setOnAction(event -> {
             matchesHead.setText("All Played Matches");
+            matchTable.getColumns().clear();
+            matchTable.setItems(getMatches());
             matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
             showAllMatchBtn.setDisable(true);
             showMatchBtn.setDisable(false);
@@ -619,10 +634,26 @@ public class GraphicalInterface {
         }else {
             plm = new PremierLeagueManager();
         }
-//        plm = plm.getInstance();
+
         ObservableList<Match> matches = FXCollections.observableArrayList();
-//        plm.sortTable();
         for(Match match: plm.getPlayedMatches()){
+            matches.add(match);
+        }
+        return matches;
+    }
+
+    public static ObservableList<Match> getFilteredMatches(int day, int month, int year){
+        PremierLeagueManager plm = new PremierLeagueManager();
+        Path filePath = Paths.get("./plm.ser");
+        if(Files.exists(filePath)){
+            plm = plm.getInstance();
+        }else {
+            plm = new PremierLeagueManager();
+        }
+
+        ObservableList<Match> matches = FXCollections.observableArrayList();
+
+        for(Match match: plm.getFilteredMatches(day,month,year)){
             matches.add(match);
         }
         return matches;

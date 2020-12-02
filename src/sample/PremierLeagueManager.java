@@ -287,6 +287,20 @@ public class PremierLeagueManager extends Application implements Serializable,Le
                 '}';
     }
 
+    public ArrayList<Match> getFilteredMatches(int day,int month, int year){
+        ArrayList<Match> matches = getPlayedMatches();
+        ArrayList<Match> sorted = new ArrayList<>();
+        for(Match match : matches){
+//            if(match.getDate().getDay()==day && match.getDate().getMonth()==month && match.getDate().getYear()==year){
+//                sorted.add(match);
+//            }
+            if(match.getDate().getDay()==year){
+                sorted.add(match);
+            }
+        }
+        return sorted;
+    }
+
     public ArrayList<FootballClub> getClubsArray() {
         return clubsArray;
     }
