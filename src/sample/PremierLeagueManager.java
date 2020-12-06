@@ -43,7 +43,7 @@ public class PremierLeagueManager extends Application implements Serializable,Le
                 if (club.getClubName().equals(clubName)) {
                     clubsArray.remove(club);
                     System.out.println("club removed");
-                    return;
+                    break;
                 }
                 System.out.println("Invalid club name");
             }
@@ -317,3 +317,10 @@ public class PremierLeagueManager extends Application implements Serializable,Le
         this.playedMatches = playedMatches;
     }
 }
+
+
+
+
+
+
+
