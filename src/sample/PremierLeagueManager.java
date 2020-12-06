@@ -50,20 +50,17 @@ public class PremierLeagueManager extends Application implements Serializable,Le
         }
     }
 
-    public void testThis(){
-        try{
-            FileInputStream fis = new FileInputStream("club.ser");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-//            SportsClub one = (SportsClub) ois.readObject();
-            PremierLeagueManager plm = (PremierLeagueManager) ois.readObject();
-//            SportsClub two = (SportsClub) ois.readObject();
-            System.out.println(plm.toString());
-//            System.out.println(two.getLocation());
-            ois.close();
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-    }
+//    public void testThis(){
+//        try{
+//            FileInputStream fis = new FileInputStream("club.ser");
+//            ObjectInputStream ois = new ObjectInputStream(fis);
+//            PremierLeagueManager plm = (PremierLeagueManager) ois.readObject();
+//            System.out.println(plm.toString());
+//            ois.close();
+//        }catch(Exception ex){
+//            ex.printStackTrace();
+//        }
+//    }
 
     public void consoleRun(){
         System.out.println("");
