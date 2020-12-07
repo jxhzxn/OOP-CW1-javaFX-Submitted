@@ -417,12 +417,8 @@ public class GraphicalInterface {
         });
 
         closeBtn.setOnAction(event -> {
-//            finalPlm.saveInstance(finalPlm);
-//            System.exit(1);
-//            System.out.println(finalPlm.getFilteredMatches(2,2,1999).get(0).getTeam1().getClubName());
-            System.out.println("Year: "+finalPlm.getPlayedMatches().get(0).getDate().getYear());
-            System.out.println("Month: "+finalPlm.getPlayedMatches().get(0).getDate().getMonth());
-            System.out.println("Day: "+finalPlm.getPlayedMatches().get(0).getDate().getDay());
+            finalPlm.saveInstance(finalPlm);
+            System.exit(1);
         });
 
         clearBtn.setOnAction(event -> {
