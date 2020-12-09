@@ -62,6 +62,7 @@ public class Main {
                     int month = input1.nextInt();
                     System.out.print("Enter the Year  :   ");
                     int year = input1.nextInt();
+                    input1.nextLine();
                     Date matchDate = new Date(day,month,year);
                     System.out.print("Team 1    :   ");
                     String team1Name = input2.nextLine();

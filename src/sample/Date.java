@@ -13,8 +13,8 @@ public class Date implements Serializable {
 
     public Date(int day, int month, int year) {
         this.day = day;
-        this.day = month;
-        this.day = year;
+        this.month = month;
+        this.year = year;
     }
 
     public void setDay(int day) {
