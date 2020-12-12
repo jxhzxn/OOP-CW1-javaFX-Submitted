@@ -318,7 +318,7 @@ public class GraphicalInterface {
         TableView<Match> matchTable = new TableView<>();
 
         TableColumn<Match,String> dateColumn = new TableColumn<>("Date");
-        dateColumn.setMinWidth(120);
+        dateColumn.setMinWidth(140);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("DatePrint"));
 
         TableColumn<Match,String> team1Column = new TableColumn<>("Team1");
