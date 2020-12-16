@@ -194,6 +194,13 @@ public class GraphicalInterface {
         addMatchBtn.setPrefHeight(30);
         addMatchBtn.setId("createClubBtn");
 
+        Button sortByDateBtn = new Button("Sort by Date");
+        sortByDateBtn.setLayoutX(800);
+        sortByDateBtn.setLayoutY(483);
+        sortByDateBtn.setPrefWidth(160);
+        sortByDateBtn.setPrefHeight(30);
+        sortByDateBtn.setId("createClubBtn");
+
         Button randomMatchBtn = new Button("Add Random Match");
         randomMatchBtn.setLayoutX(550);
         randomMatchBtn.setLayoutY(390);
@@ -417,35 +424,42 @@ public class GraphicalInterface {
             }
         });
 
-        closeBtn.setOnAction(event -> {
-            //write here
-//            finalPlm.saveInstance(finalPlm);
-//            System.exit(1);
-
-            matchesHead.setText("Matches Sorted");
+        sortByDateBtn.setOnAction(event -> {
+            matchesHead.setText("Matches Sorted by Date");
             matchTable.getColumns().clear();
             matchTable.setItems(getMatchesSortedDate());
             matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
+        });
+
+        closeBtn.setOnAction(event -> {
+            finalPlm.saveInstance(finalPlm);
+            System.exit(1);
         });
 
         clearBtn.setOnAction(event -> {
             dayTxt2.clear();
             monthTxt2.clear();
             yearTxt2.clear();
+            dayTxt2.setId("date");
+            monthTxt2.setId("date");
+            yearTxt2.setId("date");
         });
 
 
 
         showMatchBtn.setOnAction(event -> {
-            matchesHead.setText("Matches");
-            showAllMatchBtn.setDisable(false);
+//            showAllMatchBtn.setDisable(false);
             matchTable.getColumns().clear();
-            showMatchBtn.setDisable(true);
+//            showMatchBtn.setDisable(true);
             if(dayTxt2.getText().length()==0 || monthTxt2.getText().length()==0 || yearTxt2.getText().length()==0){
                 errorCheck(dayTxt2,monthTxt2,yearTxt2);
             }else{
+                matchesHead.setText("Matches Played On - "+dayTxt2.getText()+"-"+monthTxt2.getText()+"-"+yearTxt2.getText());
                 matchTable.setItems(getFilteredMatches(Integer.parseInt(dayTxt2.getText()),Integer.parseInt(monthTxt2.getText()),Integer.parseInt(yearTxt2.getText())));
                 matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
+                dayTxt2.clear();
+                monthTxt2.clear();
+                yearTxt2.clear();
             }
         });
 
@@ -454,8 +468,14 @@ public class GraphicalInterface {
             matchTable.getColumns().clear();
             matchTable.setItems(getMatches());
             matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
-            showAllMatchBtn.setDisable(true);
-            showMatchBtn.setDisable(false);
+//            showAllMatchBtn.setDisable(true);
+//            showMatchBtn.setDisable(false);
+            dayTxt2.clear();
+            monthTxt2.clear();
+            yearTxt2.clear();
+            dayTxt2.setId("date");
+            monthTxt2.setId("date");
+            yearTxt2.setId("date");
 
         });
 
@@ -567,7 +587,7 @@ public class GraphicalInterface {
                 divOne,divTwo,divThree,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,
                 createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,
                 addMatchBtn,lastMatchBtn,lastMatchClearBtn,table,randomMatchBtn,matchTable,showAllMatchBtn,viewMatchHead,
-                dayTxt2,monthTxt2,yearTxt2,h12,h22,pointsTableHead,matchesHead,showMatchBtn,clearBtn
+                dayTxt2,monthTxt2,yearTxt2,h12,h22,pointsTableHead,matchesHead,showMatchBtn,clearBtn,sortByDateBtn
         );
         guiScene = new Scene(guiPane,1850,830);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());
