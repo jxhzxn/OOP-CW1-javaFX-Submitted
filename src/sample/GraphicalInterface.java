@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GraphicalInterface {
@@ -492,9 +493,27 @@ public class GraphicalInterface {
             yearTxt.setId("teamTxt");
         });
 
+        int checkYear = Calendar.getInstance().get(Calendar.YEAR);
+        int checkMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int checkDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+
+
         addMatchBtn.setOnAction(event -> {
             if(dayTxt.getText().length()==0 || monthTxt.getText().length()==0 || yearTxt.getText().length()==0 || team1Txt.getText().length()==0 || team1Goals.getText().length()==0 || team2Goals.getText().length()==0 || team2Txt.getText().length()==0){
                 errorCheck(dayTxt,monthTxt,yearTxt,team1Txt,team1Goals,team2Txt,team2Goals);
+            }else if(team1Txt.getText().equals(team2Txt.getText())){
+                Alert alert = new Alert(Alert.AlertType.NONE,"Both Teams Can't be the same", ButtonType.OK);
+                alert.show();
+                team1Txt.clear();
+                team2Txt.clear();
+                team1Goals.clear();
+                team2Goals.clear();
+            }else if(Integer.parseInt(yearTxt.getText())>checkYear || Integer.parseInt(monthTxt.getText())>checkMonth || Integer.parseInt(dayTxt.getText())>checkDay){
+                Alert alert = new Alert(Alert.AlertType.NONE,"Date cannot be Future", ButtonType.OK);
+                alert.show();
+                dayTxt.clear();
+                monthTxt.clear();
+                yearTxt.clear();
             }else{
                 Date date = new Date(Integer.parseInt(dayTxt.getText()),Integer.parseInt(monthTxt.getText()),Integer.parseInt(yearTxt.getText()));
                 finalPlm.addMatch(team1Txt.getText(),team2Txt.getText(),Integer.parseInt(team1Goals.getText()),Integer.parseInt(team2Goals.getText()),date);
@@ -655,3 +674,5 @@ public class GraphicalInterface {
         return matches;
     }
 }
+
+
