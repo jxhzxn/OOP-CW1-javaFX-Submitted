@@ -418,8 +418,14 @@ public class GraphicalInterface {
         });
 
         closeBtn.setOnAction(event -> {
-            finalPlm.saveInstance(finalPlm);
-            System.exit(1);
+            //write here
+//            finalPlm.saveInstance(finalPlm);
+//            System.exit(1);
+
+            matchesHead.setText("Matches Sorted");
+            matchTable.getColumns().clear();
+            matchTable.setItems(getMatchesSortedDate());
+            matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
         });
 
         clearBtn.setOnAction(event -> {
@@ -542,7 +548,7 @@ public class GraphicalInterface {
             int month = ThreadLocalRandom.current().nextInt(1, 13);
 //            int year = ThreadLocalRandom.current().nextInt(20, 32);
 
-            Date randomDate = new Date(day,month,2020);
+            Date randomDate = new Date(day,month,checkYear);
 
             while(team1Name==team2Name){
                 team2Name = ThreadLocalRandom.current().nextInt(0, finalPlm.getClubsArray().size());
@@ -669,6 +675,23 @@ public class GraphicalInterface {
         ObservableList<Match> matches = FXCollections.observableArrayList();
 
         for(Match match: plm.getFilteredMatches(day,month,year)){
+            matches.add(match);
+        }
+        return matches;
+    }
+
+    public static ObservableList<Match> getMatchesSortedDate(){
+        PremierLeagueManager plm = new PremierLeagueManager();
+        Path filePath = Paths.get("./plm.ser");
+        if(Files.exists(filePath)){
+            plm = plm.getInstance();
+        }else {
+            plm = new PremierLeagueManager();
+        }
+
+        ObservableList<Match> matches = FXCollections.observableArrayList();
+        plm.sortTableDate();
+        for(Match match: plm.getPlayedMatches()){
             matches.add(match);
         }
         return matches;
