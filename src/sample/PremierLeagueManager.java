@@ -296,6 +296,28 @@ public class PremierLeagueManager extends Application implements Serializable,Le
         return sorted;
     }
 
+//    public void sortTableDate(){
+//        if(getPlayedMatches().size()==1){
+//
+//        }else {
+//            for (int y = 1; y <= getPlayedMatches().size() - 1; y++) {
+//                for (int x = 1; x <= getPlayedMatches().size() - 1; x++) {
+//                    if (getPlayedMatches().get(x).getDate().getYear() < getPlayedMatches().get(x - 1).getDate().getYear()) {
+//                        Collections.swap(getPlayedMatches(), x, x - 1);
+//                    }if(getPlayedMatches().get(x).getDate().getYear() == getPlayedMatches().get(x - 1).getDate().getYear()) {
+//                        if (getPlayedMatches().get(x).getDate().getMonth() < getPlayedMatches().get(x - 1).getDate().getMonth()) {
+//                            Collections.swap(getPlayedMatches(), x, x - 1);
+//                        }
+//                    }if(getPlayedMatches().get(x).getDate().getMonth() == getPlayedMatches().get(x - 1).getDate().getMonth()){
+//                        if (getPlayedMatches().get(x).getDate().getDay() < getPlayedMatches().get(x - 1).getDate().getDay()) {
+//                            Collections.swap(getPlayedMatches(), x, x - 1);
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+
     public void sortTableDate(){
         if(getPlayedMatches().size()==1){
 
@@ -304,11 +326,11 @@ public class PremierLeagueManager extends Application implements Serializable,Le
                 for (int x = 1; x <= getPlayedMatches().size() - 1; x++) {
                     if (getPlayedMatches().get(x).getDate().getYear() < getPlayedMatches().get(x - 1).getDate().getYear()) {
                         Collections.swap(getPlayedMatches(), x, x - 1);
-                    } else if(getPlayedMatches().get(x).getDate().getYear() == getPlayedMatches().get(x - 1).getDate().getYear()) {
+                    }if(getPlayedMatches().get(x).getDate().getYear() == getPlayedMatches().get(x - 1).getDate().getYear()) {
                         if (getPlayedMatches().get(x).getDate().getMonth() < getPlayedMatches().get(x - 1).getDate().getMonth()) {
                             Collections.swap(getPlayedMatches(), x, x - 1);
                         }
-                    }else if(getPlayedMatches().get(x).getDate().getMonth() == getPlayedMatches().get(x - 1).getDate().getMonth()){
+                    }if(getPlayedMatches().get(x).getDate().getYear() == getPlayedMatches().get(x - 1).getDate().getYear() && getPlayedMatches().get(x).getDate().getMonth() == getPlayedMatches().get(x - 1).getDate().getMonth()){
                         if (getPlayedMatches().get(x).getDate().getDay() < getPlayedMatches().get(x - 1).getDate().getDay()) {
                             Collections.swap(getPlayedMatches(), x, x - 1);
                         }
@@ -317,6 +339,8 @@ public class PremierLeagueManager extends Application implements Serializable,Le
             }
         }
     }
+
+
 
     public ArrayList<FootballClub> getClubsArray() {
         return clubsArray;

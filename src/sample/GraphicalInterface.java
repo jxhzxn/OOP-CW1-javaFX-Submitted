@@ -358,6 +358,21 @@ public class GraphicalInterface {
         team2Column.setId("tableHead");
         team2ScoreColumn.setId("tableHead");
 
+        dateColumn.setSortable(false);
+        team1Column.setSortable(false);
+        team1ScoreColumn.setSortable(false);
+        team2Column.setSortable(false);
+        team2ScoreColumn.setSortable(false);
+
+        dateColumn.setResizable(false);
+        team1Column.setResizable(false);
+        team1Column.setResizable(false);
+        team1ScoreColumn.setResizable(false);
+        team2Column.setResizable(false);
+        team2ScoreColumn.setResizable(false);
+
+
+
         TextField dayTxt2 = new TextField();
         dayTxt2.setLayoutX(50);
         dayTxt2.setLayoutY(540);
@@ -454,7 +469,7 @@ public class GraphicalInterface {
             if(dayTxt2.getText().length()==0 || monthTxt2.getText().length()==0 || yearTxt2.getText().length()==0){
                 errorCheck(dayTxt2,monthTxt2,yearTxt2);
             }else{
-                matchesHead.setText("Matches Played On - "+dayTxt2.getText()+"-"+monthTxt2.getText()+"-"+yearTxt2.getText());
+                matchesHead.setText("Matches On - "+dayTxt2.getText()+"-"+monthTxt2.getText()+"-"+yearTxt2.getText());
                 matchTable.setItems(getFilteredMatches(Integer.parseInt(dayTxt2.getText()),Integer.parseInt(monthTxt2.getText()),Integer.parseInt(yearTxt2.getText())));
                 matchTable.getColumns().addAll(dateColumn,team1Column,team1ScoreColumn,team2Column,team2ScoreColumn);
                 dayTxt2.clear();
@@ -520,7 +535,7 @@ public class GraphicalInterface {
         });
 
         int checkYear = Calendar.getInstance().get(Calendar.YEAR);
-        int checkMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int checkMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
         int checkDay = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 
 
@@ -534,13 +549,25 @@ public class GraphicalInterface {
                 team2Txt.clear();
                 team1Goals.clear();
                 team2Goals.clear();
-            }else if(Integer.parseInt(yearTxt.getText())>checkYear || Integer.parseInt(monthTxt.getText())>checkMonth || Integer.parseInt(dayTxt.getText())>checkDay){
-                Alert alert = new Alert(Alert.AlertType.NONE,"Date cannot be Future", ButtonType.OK);
+            }else if(Integer.parseInt(yearTxt.getText())>checkYear){
+                Alert alert = new Alert(Alert.AlertType.NONE,"Date cannot be Future. Today is : "+checkDay+"-"+checkMonth+"-"+checkYear, ButtonType.OK);
                 alert.show();
                 dayTxt.clear();
                 monthTxt.clear();
                 yearTxt.clear();
-            }else{
+            }else if(Integer.parseInt(yearTxt.getText())<=checkYear && Integer.parseInt(monthTxt.getText())>checkMonth){
+                Alert alert = new Alert(Alert.AlertType.NONE,"Date cannot be Future. Today is : "+checkDay+"-"+checkMonth+"-"+checkYear, ButtonType.OK);
+                alert.show();
+                dayTxt.clear();
+                monthTxt.clear();
+                yearTxt.clear();
+            }else if(Integer.parseInt(yearTxt.getText())<=checkYear && Integer.parseInt(monthTxt.getText())<=checkMonth && Integer.parseInt(dayTxt.getText())>checkDay){
+                Alert alert = new Alert(Alert.AlertType.NONE,"Date cannot be Future. Today is : "+checkDay+"-"+checkMonth+"-"+checkYear, ButtonType.OK);
+                alert.show();
+                dayTxt.clear();
+                monthTxt.clear();
+                yearTxt.clear();
+            }else {
                 Date date = new Date(Integer.parseInt(dayTxt.getText()),Integer.parseInt(monthTxt.getText()),Integer.parseInt(yearTxt.getText()));
                 finalPlm.addMatch(team1Txt.getText(),team2Txt.getText(),Integer.parseInt(team1Goals.getText()),Integer.parseInt(team2Goals.getText()),date);
                 finalPlm.saveInstance(finalPlm);
@@ -583,11 +610,17 @@ public class GraphicalInterface {
         });
 
 
+        Label dateLbl = new Label("DATE : "+checkDay+"-"+checkMonth+"-"+checkYear);
+        dateLbl.setLayoutX(150);
+        dateLbl.setLayoutY(40);
+        dateLbl.setId("dateLbl");
+
+
         guiPane.getChildren().addAll(
                 divOne,divTwo,divThree,createClubBtn,clubNameTxt,clubLocationTxt,homeGroundTxt,closeBtn,headLbl,
                 createHead,addMatchHead,dayTxt,monthTxt,yearTxt,h1,h2,team1Txt,team2Txt,team1Goals,vs,team2Goals,
                 addMatchBtn,lastMatchBtn,lastMatchClearBtn,table,randomMatchBtn,matchTable,showAllMatchBtn,viewMatchHead,
-                dayTxt2,monthTxt2,yearTxt2,h12,h22,pointsTableHead,matchesHead,showMatchBtn,clearBtn,sortByDateBtn
+                dayTxt2,monthTxt2,yearTxt2,h12,h22,pointsTableHead,matchesHead,showMatchBtn,clearBtn,sortByDateBtn,dateLbl
         );
         guiScene = new Scene(guiPane,1850,830);
         guiScene.getStylesheets().add(GraphicalInterface.class.getResource("stylesheet.css").toExternalForm());

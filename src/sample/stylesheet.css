@@ -36,6 +36,8 @@
     -fx-font-size: 18;
     -fx-background-color: #dc143c;
     -fx-font-weight: bold;
+    -fx-text-fill: white;
+
 }
 
 #clearBtn:hover{
@@ -49,6 +51,18 @@
     -fx-font-family: "Verdana";
     -fx-background-color: #e57e00;
     -fx-padding: 5;
+    -fx-border-radius: 20;
+    -fx-text-fill: #a10c33;
+}
+
+#dateLbl{
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+    /*-fx-text-fill: #ff6666;*/
+    -fx-font-family: "Verdana";
+    -fx-background-color: #a10c33;
+    -fx-text-fill: white;
+    -fx-padding: 4;
     -fx-border-radius: 20;
 }
 
